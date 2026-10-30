@@ -1,6 +1,6 @@
 :root {
   --font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --page: #f0e9df;
+  --page: #eee4d7;
   --surface: #ffffff;
   --ink: #0a0a0a;
   --muted: #6f6f6f;
@@ -190,9 +190,9 @@ button { border: 0; }
   transform: translateY(0);
 }
 
-/* Horizontal merchandising rails use the physical viewport as their clipping edge.
-   The first item remains aligned with the page content, but scrolling can travel
-   all the way to the phone edge instead of disappearing inside page padding. */
+/* Mobile merchandising rails are clipped only by the physical viewport.
+   Initial/final alignment is supplied by the first/last item margins rather
+   than internal rail padding, so cards can visually travel to the phone edge. */
 @media (max-width: 720px) {
   :root { --header-height: 64px; }
   .site-header { padding: 0 12px; }
@@ -200,11 +200,22 @@ button { border: 0; }
 
   .category-scroller,
   .combo-scroller {
-    width: 100vw;
+    width: calc(100% + 24px);
     margin-right: -12px;
     margin-left: -12px;
-    padding-right: 12px;
-    padding-left: 12px;
+    padding-right: 0;
+    padding-left: 0;
+    scroll-padding-inline: 12px;
+  }
+
+  .category-scroller > :first-child,
+  .combo-scroller > :first-child {
+    margin-left: 12px;
+  }
+
+  .category-scroller > :last-child,
+  .combo-scroller > :last-child {
+    margin-right: 12px;
   }
 }
 
