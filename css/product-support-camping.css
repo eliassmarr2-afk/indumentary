@@ -1,0 +1,83 @@
+.conversation-resume-widget {
+  margin: 18px 0 0;
+}
+
+.conversation-resume-widget__button {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 42px minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  border: 1px solid #e6dfd7;
+  border-radius: 14px;
+  background: #f8f4ee;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.conversation-resume-widget__icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+}
+
+.conversation-resume-widget__icon svg,
+.conversation-resume-widget__status svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.conversation-resume-widget__copy,
+.conversation-resume-widget__copy span,
+.conversation-resume-widget__copy strong {
+  display: block;
+  min-width: 0;
+}
+
+.conversation-resume-widget__label {
+  color: #8a837c;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.conversation-resume-widget__copy strong {
+  margin-top: 2px;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-resume-widget__status {
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+}
+
+.product-support-form input[aria-invalid="true"] {
+  border-color: #a12f2f;
+}
+
+.product-support-error {
+  display: block;
+  margin-top: 6px;
+  color: #a12f2f;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.product-support-quick-questions[hidden] {
+  display: none !important;
+}
