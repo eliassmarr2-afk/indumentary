@@ -107,10 +107,12 @@ Primera fase local/mock; futura fuente Shopify/provider.
 Base:
 
 ```text
-PAGE = #EDEDED
+PAGE = #F0E9DF
 SURFACE = #FFFFFF
 PRIMARY STRUCTURE = BLACK
 ```
+
+El canvas utiliza beige suave para diferenciar claramente las cards blancas sin competir con la fotografía.
 
 Cards principales sin sombra ni borde decorativo.
 
@@ -240,3 +242,35 @@ local Event Layer seam
 ```
 
 El siguiente movimiento es revisión visual y publicación del preview, no incorporación automática de nuevas superficies.
+
+---
+
+## I-020 — Los rails horizontales mobile usan el viewport como límite físico
+
+Los scrollers horizontales de categorías, combos y futuras superficies equivalentes no deben desaparecer dentro del padding lateral del contenido.
+
+En mobile:
+
+```text
+FIRST ITEM ALIGNMENT
+= PAGE CONTENT
+
+SCROLL CLIPPING EDGE
+= PHYSICAL VIEWPORT EDGE
+```
+
+Esto maximiza el ancho útil sin romper la alineación inicial del layout.
+
+---
+
+## I-021 — El fondo general pasa a beige suave
+
+Se reemplaza el gris `#EDEDED` por:
+
+```text
+PAGE BACKGROUND
+=
+#F0E9DF
+```
+
+Las superficies comerciales permanecen en `#FFFFFF` para conservar contraste limpio y lectura inmediata.
