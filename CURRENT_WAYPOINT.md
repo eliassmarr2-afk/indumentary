@@ -1,8 +1,8 @@
 # INDUMENTARY — CURRENT WAYPOINT
 
 **Date:** 2026-10-30  
-**Track:** FIRST NICHE SITE / HOME BUILD 01 ACCEPTED  
-**Implementation:** HOME BUILD 01 ACCEPTED / PRODUCT DETAIL + COMBO DETAIL NEXT
+**Track:** FIRST NICHE SITE / PRODUCT PAGE BUILD 02 MATERIALIZED  
+**Implementation:** HOME ACCEPTED / PRODUCT PAGE IMPLEMENTED / COMBO DETAIL NEXT
 
 ---
 
@@ -51,10 +51,6 @@ FIRST EXPRESSION
 =
 INDUMENTARIA DEPORTIVA
 
-FINAL BRAND
-=
-NOT YET DEFINED
-
 CURRENT COMMERCE ENGINE
 =
 MOCK / DEVELOPMENT ONLY
@@ -66,114 +62,26 @@ SHOPIFY COMPATIBLE
 
 ---
 
-# 4. HOME BUILD 01 — ACCEPTED
-
-Implemented and visually accepted on `main`:
+# 4. HOME BUILD 01
 
 ```text
-HEADER
-  hamburger
-  utility logo
-  cart entry
-
-LOCATION SURFACE
-  “¿A dónde lo enviamos?”
-  CP
-  optional address
-  shared session state
-
-SEARCH
-  local/mock catalog now
-  provider-decoupled seam
-
-HERO
-  provisional editorial image
-  wide desktop composition
-  mobile-specific proportion
-
-CATEGORIES
-  Camisetas
-  Pantalones
-  Camperas
-  Gorras y Pilusos
-  Medias
-  Botines
-  Pelotas
-
-COMBOS
-  3 horizontal cards
-  image 1/3
-  content 2/3
-  mobile full-bleed scrollport
-
-PRODUCTS
-  6 cards
-  2-column layout
-  stars
-  delivery demo badge
-  Mercado Pago trust label
-  price section divided by full-width line
-
-FOOTER / POLICY ACCESS
+HOME BUILD 01
+=
+ACCEPTED
 ```
 
-Final Home refinements accepted:
+Public Home includes header, shared session location, provider-decoupled search, hero, categories, combo cards, product cards and policy/footer access.
 
-```text
-PAGE BACKGROUND
-=
-#F0E9DF
-
-SURFACES
-=
-#FFFFFF
-
-MOBILE HORIZONTAL RAIL CLIPPING
-=
-PHYSICAL VIEWPORT EDGE
-```
-
----
-
-# 5. CODE STRUCTURE
-
-```text
-index.html
-
-css/
-  base.css
-  home.css
-
-js/
-  app.js
-  config/
-    site.js
-  commerce/
-    catalog.js
-    cart.js
-  shared/
-    location-state.js
-    events.js
-  protocol/
-    logistics.js
-
-.nojekyll
-```
-
-Only responsibilities that exist are materialized. Tracking/Support/Experience files are not created empty; their boundaries remain documented and will appear when implemented.
-
----
-
-# 6. VISUAL BASE
+Final visual base:
 
 ```text
 FONT
 =
 MANROPE
 
-PAGE
+PAGE BACKGROUND
 =
-#F0E9DF
+#EEE4D7
 
 SURFACES
 =
@@ -183,100 +91,229 @@ PRIMARY STRUCTURAL COLOR
 =
 BLACK / NEAR-BLACK
 
-DEFAULT CARD RADIUS
+MOBILE HORIZONTAL RAIL CLIPPING
 =
-8px
-
-DECORATIVE CARD BORDERS
-=
-NO
-
-DECORATIVE CARD SHADOWS
-=
-NO
+PHYSICAL VIEWPORT EDGE
 ```
 
-Images are provisional assets for layout review and may be replaced later without changing structure.
+Hero content is rendered directly over campaign media with a lower contrast gradient; no black content panel remains.
 
 ---
 
-# 7. LOCATION / LOGISTICS
-
-The Home location popup persists in `sessionStorage` and is intentionally separated from Logistics authority.
+# 5. PRODUCT PAGE BUILD 02
 
 ```text
-LOCATION INPUT
-→ SESSION LOCATION CONTEXT
-→ future Logistics Adapter
-→ Protocol Data Logistics
+PRODUCT PAGE UI
+=
+IMPLEMENTED WITH MOCK DEVELOPMENT DATA
 ```
 
-Current Logistics adapter returns `not_integrated` and never invents tariff/promise data.
-
-The green delivery badge is explicitly demo-only until real Logistics resolution exists.
-
----
-
-# 8. COMMERCE / SHOPIFY
-
-Catalog and search currently use mock data through `js/commerce/catalog.js`.
-
-The UI does not depend directly on Shopify.
-
-Target migration path remains:
+Implemented in:
 
 ```text
-SEARCH / PRODUCT UI
-→ COMMERCE BOUNDARY
-→ SHOPIFY / AUTHORIZED PROVIDER
+product.html
+css/product.css
+js/product.js
+js/commerce/product-detail.js
+js/shared/rich-html.js
+PRODUCT_PAGE.md
+```
+
+Home product cards now navigate to:
+
+```text
+product.html?id={product_id}
 ```
 
 ---
 
-# 9. MEASUREMENT
+# 6. PRODUCT PAGE STRUCTURE
 
-A local Site Event Layer seam is present in:
+```text
+GLOBAL HEADER
+PRODUCT MEDIA
+THUMBNAIL MEDIA RAIL
+PRODUCT TITLE / CATEGORY / RATING / PRICE
+STANDARD OPTIONS
+COMMERCIAL OFFER CARDS
+SHIPPING / SESSION LOCATION
+TRUST / PAYMENT CONTEXT
+ADD TO CART
+STICKY TABS
+TAB CONTENT
+SHOPIFY PRODUCT DESCRIPTION HTML
+```
 
-`js/shared/events.js`
-
-It expresses storefront events without binding the UI to GTM or another transport.
-
-No live measurement transport is active.
+Description remains the last content block.
 
 ---
 
-# 10. PUBLIC PREVIEW
+# 7. SHOPIFY PREPARATION
 
-GitHub Pages is enabled and deployment from `main` is active.
+Target integrated ownership remains:
 
-Public preview:
+```text
+PRODUCT MEDIA
+=
+SHOPIFY
+
+PRODUCT DESCRIPTION CONTENT
+=
+SHOPIFY
+
+TAB CONFIGURATION
+=
+SHOPIFY METAFIELD / JSON → COMMERCE ADAPTER
+```
+
+The current media, tabs and rich description are mocks used to certify UI behavior.
+
+Real product images are expected to be served by Shopify rather than stored in GitHub.
+
+---
+
+# 8. OPTIONS VS OFFERS
+
+The Product Page keeps separate:
+
+```text
+COLOR / SIZE / NICHE OPTION
+!=
+COMMERCIAL OFFER
+```
+
+Offer Cards preserve development identifiers for:
+
+```text
+offerId
+protocolOfferId
+providerVariantId
+selectedOptions
+```
+
+This does not make the storefront authoritative for Product Set composition.
+
+Canonical target remains:
+
+```text
+PROVIDER VARIANT
+→ EXPLICIT PROVIDER BINDING
+→ COMMERCIAL OFFER
+→ PRODUCT SET
+→ COMPONENTS
+```
+
+No fuzzy title matching is authorized.
+
+---
+
+# 9. CART DEVELOPMENT MODEL
+
+`js/commerce/cart.js` now preserves separate cart lines for distinct commercial selections.
+
+Current cart remains development-only.
+
+Target:
+
+```text
+STOREFRONT SELECTION
+→ COMMERCE ADAPTER
+→ EXACT PROVIDER MERCHANDISE
+→ SHOPIFY CART
+```
+
+---
+
+# 10. LOCATION / LOGISTICS
+
+Home and Product Page share:
+
+```text
+SESSION LOCATION CONTEXT
+```
+
+The same postal code/address context is reused across both surfaces.
+
+It is not a tariff.
+
+Current Logistics adapter remains:
+
+```text
+NOT INTEGRATED
+```
+
+Future target:
+
+```text
+SESSION LOCATION
+→ LOGISTICS ADAPTER
+→ PROTOCOL DATA LOGISTICS
+→ PUBLIC RESULT
+```
+
+---
+
+# 11. TABS + DESCRIPTION
+
+Tabs are rendered from a normalized JSON model and support variable labels/content plus sticky horizontal navigation.
+
+The current JSON schema is explicitly development-only and does not freeze Shopify runtime field names.
+
+Rich HTML is rendered through an allowlist sanitizer.
+
+Description content is positioned last and is reserved for Shopify product description content at integration time.
+
+---
+
+# 12. MEASUREMENT
+
+Product Page currently emits local Site Event Layer semantics including:
+
+```text
+product_page_viewed
+product_media_selected
+product_option_selected
+commercial_offer_selected
+product_tab_selected
+cart_item_added
+shipping_location_opened
+shipping_location_saved
+```
+
+No live GTM / Protocol Data measurement transport is active.
+
+---
+
+# 13. PUBLIC PREVIEW
+
+Home:
 
 ```text
 https://eliassmarr2-afk.github.io/indumentary/
 ```
 
+Product Page example:
+
+```text
+https://eliassmarr2-afk.github.io/indumentary/product.html?id=prod-002
+```
+
 ---
 
-# 11. NEXT MOVEMENT
+# 14. NEXT MOVEMENT
 
 ```text
-PRODUCT DETAIL + COMBO DETAIL
+PRODUCT PAGE BUILD 02
 =
-DISCUSSION / STRUCTURE AGREEMENT
+VISUAL / FUNCTIONAL REVIEW
 ```
 
-Target next sequence:
+then:
 
 ```text
-DEFINE PRODUCT PAGE STRUCTURE
-↓
-DEFINE COMBO / OFFER DETAIL STRUCTURE
-↓
-AGREE DATA OWNERSHIP + VARIANT / SIZE / COLOR BEHAVIOR
-↓
-AGREE SHIPPING / SESSION LOCATION SURFACE REUSE
-↓
-BUILD 02 AUTHORIZATION
+COMBO / OFFER DETAIL
+=
+DISCUSSION / STRUCTURE AGREEMENT NEXT
 ```
 
-Do not begin substantial Product Page or Combo Detail code until their visual and functional structure is explicitly agreed.
+Do not claim Shopify or Protocol Data integration from the current mocks.
