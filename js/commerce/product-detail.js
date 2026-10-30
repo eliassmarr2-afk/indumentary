@@ -18,19 +18,24 @@ const DEFAULT_TABS_JSON = JSON.stringify([
   }
 ]);
 
-function mediaFor(product) {
-  const others = products
-    .filter((item) => item.id !== product.id)
-    .map((item) => item.image);
+function imageVariant(src, suffix = "") {
+  if (!src || !suffix) return src;
+  const joiner = src.includes("?") ? "&" : "?";
+  return `${src}${joiner}${suffix}`;
+}
 
-  return [product.image, ...others]
-    .filter(Boolean)
-    .slice(0, 4)
-    .map((src, index) => ({
-      id: `${product.id}-media-${index + 1}`,
-      src,
-      alt: `${product.title} · vista ${index + 1}`
-    }));
+function mediaFor(product) {
+  const base = product.image;
+  return [
+    base,
+    imageVariant(base, "sat=-12&con=6"),
+    imageVariant(base, "bri=5&con=10"),
+    imageVariant(base, "sat=-30&bri=8")
+  ].filter(Boolean).map((src, index) => ({
+    id: `${product.id}-media-${index + 1}`,
+    src,
+    alt: `${product.title} · imagen temporal ${index + 1}`
+  }));
 }
 
 function makeOffers(product) {
@@ -69,16 +74,11 @@ function makeOffers(product) {
 }
 
 function buildDetail(product) {
-  const argentinaDemo = product.id === "prod-002";
   const media = mediaFor(product);
 
   return {
     ...product,
-    title: argentinaDemo ? "Campera Argentina Training" : product.title,
-    subtitle: argentinaDemo ? "Campera deportiva · inspiración albiceleste" : product.subtitle,
-    shortDescription: argentinaDemo
-      ? "Una campera deportiva liviana pensada para entrenamiento y uso urbano. Esta información es temporal y luego podrá ser administrada desde Shopify."
-      : `${product.subtitle}. Contenido temporal para visualizar la Product Page antes de conectar Shopify.`,
+    shortDescription: `${product.subtitle}. Esta información es temporal y existe para visualizar la Product Page antes de conectar Shopify.`,
     rating: 4.8,
     reviewCount: 128,
     buyers: 420,
@@ -95,10 +95,10 @@ function buildDetail(product) {
         label: "Color",
         type: "image",
         values: [
-          { id: "albiceleste", label: "Albiceleste", value: "albiceleste", image: media[0]?.src },
-          { id: "negro", label: "Negro", value: "negro", image: media[1]?.src || media[0]?.src },
-          { id: "azul", label: "Azul", value: "azul", image: media[2]?.src || media[0]?.src },
-          { id: "blanco", label: "Blanco", value: "blanco", image: media[3]?.src || media[0]?.src }
+          { id: "opcion-1", label: "Opción 1", value: "opcion-1", image: media[0]?.src },
+          { id: "opcion-2", label: "Opción 2", value: "opcion-2", image: media[1]?.src || media[0]?.src },
+          { id: "opcion-3", label: "Opción 3", value: "opcion-3", image: media[2]?.src || media[0]?.src },
+          { id: "opcion-4", label: "Opción 4", value: "opcion-4", image: media[3]?.src || media[0]?.src }
         ]
       },
       {
@@ -125,7 +125,7 @@ function buildDetail(product) {
       "¿Cuánto tarda el envío?"
     ],
     tabsJson: DEFAULT_TABS_JSON,
-    descriptionHtml: `<h2>${argentinaDemo ? "Campera Argentina Training" : product.title}</h2><p>Esta es una descripción temporal para poder evaluar visualmente la landing completa. Cuando el sitio se migre a Shopify, esta superficie renderizará el contenido enriquecido definido en el editor del producto.</p><p>Puede contener párrafos, títulos, listas, enlaces, tablas e imágenes permitidas sin convertir ese HTML en autoridad sobre la composición comercial.</p><ul><li>Shopify será la fuente del contenido descriptivo.</li><li>Los metafields podrán alimentar presentación y tabs.</li><li>Protocol Data conservará la identidad de Offer y Product Set.</li></ul>`
+    descriptionHtml: `<h2>${product.title}</h2><p>${product.subtitle}. Esta es una descripción temporal para poder evaluar visualmente la landing completa. Cuando el sitio se migre a Shopify, esta superficie renderizará el contenido enriquecido definido en el editor del producto.</p><p>Puede contener párrafos, títulos, listas, enlaces, tablas e imágenes permitidas sin convertir ese HTML en autoridad sobre la composición comercial.</p><ul><li>Shopify será la fuente del contenido descriptivo.</li><li>Los metafields podrán alimentar presentación y tabs.</li><li>Protocol Data conservará la identidad de Offer y Product Set.</li></ul>`
   };
 }
 
