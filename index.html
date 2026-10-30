@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Indumentary — Indumentaria deportiva</title>
+  <meta name="description" content="Modelo ecommerce de indumentaria deportiva preparado para Shopify y Protocol Data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/home.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <button class="icon-button icon-button--inverse" id="menuToggle" type="button" aria-label="Abrir menú" aria-controls="siteMenu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </button>
+
+      <a class="utility-logo" href="#top" aria-label="Ir al inicio">IND.</a>
+
+      <button class="cart-button" id="cartButton" type="button" aria-label="Abrir carrito">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1M10 20h.01M17 20h.01" /></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </header>
+
+    <div class="page-content" id="top">
+      <button class="location-strip" id="locationTrigger" type="button" aria-haspopup="dialog">
+        <span class="location-strip__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
+        </span>
+        <span class="location-strip__copy">
+          <strong id="locationPrimary">¿A dónde lo enviamos?</strong>
+          <small id="locationSecondary">Ingresá tu código postal y dirección opcional</small>
+        </span>
+        <svg class="location-strip__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+      </button>
+
+      <main>
+        <section class="search-block" aria-label="Buscar productos">
+          <label class="sr-only" for="productSearch">Buscar productos</label>
+          <div class="search-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            <input id="productSearch" type="search" placeholder="¿Qué producto estás buscando?" autocomplete="off" />
+          </div>
+        </section>
+
+        <section class="hero" aria-labelledby="heroTitle">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1800&q=86" alt="Modelo con indumentaria deportiva" />
+          <div class="hero__panel">
+            <span class="eyebrow">COLECCIÓN 01</span>
+            <h1 id="heroTitle">Diseñado para moverte.</h1>
+            <p>Prendas esenciales, siluetas limpias y rendimiento para todos los días.</p>
+            <a class="button button--light" href="#productos">Ver colección</a>
+          </div>
+        </section>
+
+        <section class="section section--categories" aria-labelledby="categoryTitle">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow eyebrow--dark">COLECCIONES</span>
+              <h2 id="categoryTitle">Explorá por categoría</h2>
+            </div>
+          </div>
+          <div class="category-scroller" id="categoryList" aria-label="Categorías"></div>
+        </section>
+
+        <section class="section section--combos" aria-labelledby="comboTitle">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow eyebrow--dark">OFERTAS ARMADAS</span>
+              <h2 id="comboTitle">Llevá tu combo <span>| Vestite increíble en una sola compra</span></h2>
+            </div>
+          </div>
+          <div class="combo-scroller" id="comboList" aria-label="Combos"></div>
+        </section>
+
+        <section class="section section--products" id="productos" aria-labelledby="productTitle">
+          <div class="section-heading section-heading--products">
+            <div>
+              <span class="eyebrow eyebrow--dark">NOVEDADES</span>
+              <h2 id="productTitle">Productos destacados</h2>
+            </div>
+            <span class="result-count" id="resultCount" aria-live="polite"></span>
+          </div>
+          <div class="product-grid" id="productGrid"></div>
+          <div class="empty-state" id="emptyState" hidden>
+            <strong>No encontramos productos.</strong>
+            <span>Probá con otra búsqueda.</span>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="site-footer__brand">
+          <span class="utility-logo utility-logo--footer">IND.</span>
+          <p>Modelo ecommerce de indumentaria listo para evolucionar a Shopify y Protocol Data.</p>
+        </div>
+        <nav class="site-footer__links" aria-label="Políticas">
+          <button type="button" data-reserved="Política de envío">Envío</button>
+          <button type="button" data-reserved="Devoluciones y cambios">Devoluciones y cambios</button>
+          <button type="button" data-reserved="Privacidad y datos">Privacidad</button>
+          <button type="button" data-reserved="Navegación y medición">Navegación</button>
+          <button type="button" data-reserved="Términos de uso">Términos de uso</button>
+        </nav>
+      </footer>
+    </div>
+  </div>
+
+  <div class="overlay" id="menuOverlay" hidden></div>
+  <aside class="side-menu" id="siteMenu" aria-label="Menú principal" aria-hidden="true">
+    <div class="side-menu__header">
+      <span class="utility-logo utility-logo--dark">IND.</span>
+      <button class="icon-button" id="menuClose" type="button" aria-label="Cerrar menú">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+      </button>
+    </div>
+
+    <nav class="menu-nav">
+      <a class="menu-link" href="#top" data-close-menu>
+        <span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5V21h-6v-6H9v6H3Z" /></svg></span>
+        <span>INICIO</span>
+      </a>
+
+      <details class="menu-group">
+        <summary class="menu-link">
+          <span class="menu-icon"><svg viewBox="0 0 24 24"><path d="m4 8 8-4 8 4-8 4-8-4Z" /><path d="m4 12 8 4 8-4M4 16l8 4 8-4" /></svg></span>
+          <span>COLECCIONES</span>
+          <svg class="menu-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" /></svg>
+        </summary>
+        <div class="menu-subnav">
+          <a href="#productos" data-category-link="Camisetas" data-close-menu>CAMISETAS</a>
+          <a href="#productos" data-category-link="Camperas" data-close-menu>CAMPERAS</a>
+          <a href="#productos" data-category-link="Pantalones" data-close-menu>PANTALONES</a>
+          <a href="#productos" data-category-link="Medias" data-close-menu>MEDIAS</a>
+          <a href="#productos" data-category-link="Botines" data-close-menu>BOTINES</a>
+          <a href="#productos" data-category-link="Gorras y Pilusos" data-close-menu>GORRAS Y PILUSOS</a>
+        </div>
+      </details>
+
+      <button class="menu-link" type="button" data-reserved="Cupones">
+        <span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2.5 2.5 0 0 0 0 4v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2.5 2.5 0 0 0 0-4Z" /><path d="M12 7v10" /></svg></span>
+        <span>CUPONES</span>
+      </button>
+
+      <a class="menu-link" href="#productos" data-close-menu>
+        <span class="menu-icon"><svg viewBox="0 0 24 24"><path d="m12 3 2.3 4.7L19.5 9l-3.8 3.7.9 5.3-4.6-2.5L7.4 18l.9-5.3L4.5 9l5.2-1.3Z" /></svg></span>
+        <span>NOVEDADES</span>
+      </a>
+
+      <div class="menu-divider"></div>
+
+      <button class="menu-link" type="button" id="shippingMenuButton">
+        <span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M3 6h11v10H3Z" /><path d="M14 9h4l3 3v4h-7ZM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" /></svg></span>
+        <span>SABER DE MI ENVÍO</span>
+      </button>
+
+      <button class="menu-link" type="button" data-reserved="Soporte">
+        <span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4Z" /></svg></span>
+        <span>SOPORTE</span>
+      </button>
+
+      <div class="menu-divider"></div>
+
+      <details class="menu-group">
+        <summary class="menu-link">
+          <span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6Z" /><path d="M14 3v4h4M9 11h6M9 15h6" /></svg></span>
+          <span>POLÍTICAS</span>
+          <svg class="menu-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" /></svg>
+        </summary>
+        <div class="menu-subnav">
+          <button type="button" data-reserved="Política de envío">ENVÍO</button>
+          <button type="button" data-reserved="Devolución o cambios">DEVOLUCIÓN O CAMBIOS</button>
+          <button type="button" data-reserved="Navegación / medición">NAVEGACIÓN</button>
+          <button type="button" data-reserved="Privacidad / datos">PRIVACIDAD / DATOS</button>
+          <button type="button" data-reserved="Términos comerciales">TÉRMINOS COMERCIALES</button>
+          <button type="button" data-reserved="Términos de uso">TÉRMINOS DE USO</button>
+        </div>
+      </details>
+    </nav>
+  </aside>
+
+  <div class="modal-backdrop" id="locationModal" hidden>
+    <section class="location-modal" role="dialog" aria-modal="true" aria-labelledby="locationTitle">
+      <div class="modal-heading">
+        <div>
+          <span class="eyebrow eyebrow--dark">UBICACIÓN DE ENVÍO</span>
+          <h2 id="locationTitle">¿A dónde lo enviamos?</h2>
+        </div>
+        <button class="icon-button" id="locationClose" type="button" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></svg>
+        </button>
+      </div>
+
+      <form id="locationForm" novalidate>
+        <label class="field-label" for="postalCode">Código postal</label>
+        <input class="text-field" id="postalCode" name="postalCode" type="text" inputmode="text" autocomplete="postal-code" maxlength="8" placeholder="Ej. 1414 o C1414ABC" required />
+        <small class="field-help">Preparado para autocompletado geográfico cuando se conecte la fuente autorizada.</small>
+
+        <label class="field-label" for="streetAddress">Dirección <span>opcional</span></label>
+        <input class="text-field" id="streetAddress" name="streetAddress" type="text" autocomplete="street-address" maxlength="120" placeholder="Calle y altura" />
+
+        <p class="session-note">Esta ubicación se comparte con Home y Product Page durante la sesión. No representa por sí sola una tarifa o promesa logística.</p>
+
+        <div class="modal-actions">
+          <button class="button button--secondary" id="locationCancel" type="button">Cancelar</button>
+          <button class="button button--dark" type="submit">Guardar ubicación</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
