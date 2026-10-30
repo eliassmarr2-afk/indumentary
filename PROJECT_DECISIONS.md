@@ -1,0 +1,180 @@
+# INDUMENTARY — PROJECT DECISIONS
+
+**Estado:** ACTIVE SITE DECISION LOG
+
+Este archivo registra decisiones específicas de `indumentary`. No sustituye la documentación central de SITIOS WEB DE NICHO.
+
+---
+
+## I-001 — El repo representa el vertical Indumentaria
+
+`indumentary` es el modelo maestro del vertical **Indumentaria**.
+
+La primera expresión comercial será indumentaria deportiva, pero el repo no queda limitado arquitectónicamente a una sola marca o cliente.
+
+---
+
+## I-002 — El nombre técnico del repo es `indumentary`
+
+GitHub no permitió utilizar `indumentaria`.
+
+La identidad conceptual sigue siendo:
+
+```text
+VERTICAL = INDUMENTARIA
+REPO = indumentary
+```
+
+---
+
+## I-003 — Stack inicial simple y migrable
+
+Primera construcción:
+
+```text
+HTML + CSS + JavaScript
+```
+
+No se adopta framework por anticipado.
+
+---
+
+## I-004 — Shopify no es el motor inicial
+
+```text
+CURRENT COMMERCE ENGINE
+=
+MOCK / DEVELOPMENT ONLY
+
+SHOPIFY STATUS
+=
+SHOPIFY COMPATIBLE
+```
+
+La migración/integración real se realizará después de validar el modelo comercial y los mappings.
+
+---
+
+## I-005 — Protocol Data permanece externo
+
+El repo no copia Protocol Data V2.
+
+Cada dominio se conectará mediante su boundary/adapter cuando corresponda.
+
+---
+
+## I-006 — La ubicación es contexto de sesión compartido
+
+La ubicación ingresada en Home o Product Page deberá reutilizarse en las demás superficies de envío durante la misma sesión.
+
+```text
+HOME LOCATION
+↔ PRODUCT PAGE LOCATION
+```
+
+La ubicación de sesión no es autoridad de tarifa/promesa logística.
+
+---
+
+## I-007 — Logistics será autoridad de shipping
+
+Cuando se active la integración:
+
+```text
+SESSION LOCATION CONTEXT
+→ SHIPPING ADAPTER
+→ PROTOCOL DATA LOGISTICS
+```
+
+No habrá segundo Shipping Resolver dentro del storefront.
+
+---
+
+## I-008 — Search queda desacoplado del provider
+
+```text
+SEARCH UI
+→ COMMERCE SEARCH ADAPTER
+→ CURRENT PRODUCT SOURCE
+```
+
+Primera fase local/mock; futura fuente Shopify/provider.
+
+---
+
+## I-009 — Dirección visual monocromática y producto-first
+
+Base:
+
+```text
+PAGE = #EDEDED
+SURFACE = #FFFFFF
+PRIMARY STRUCTURE = BLACK
+```
+
+Cards principales sin sombra ni borde decorativo.
+
+Default card radius = 8px.
+
+---
+
+## I-010 — Tipografía Manrope
+
+La familia tipográfica base será **Manrope**, replicando el ecommerce de referencia/camping.
+
+No se reemplaza silenciosamente por otra familia.
+
+---
+
+## I-011 — Home mínima acordada
+
+La primera Home contiene:
+
+```text
+Header
+Hamburger menu
+Cart
+Location surface
+Search
+Hero
+Categories
+Combo carousel
+6 product cards
+Policy/footer access
+```
+
+---
+
+## I-012 — Categorías iniciales
+
+```text
+Camisetas
+Pantalones
+Camperas
+Gorras y Pilusos
+Medias
+Botines
+Pelotas
+```
+
+---
+
+## I-013 — Combos son objetos comerciales, no HTML authority
+
+Las tres combo cards son presentación.
+
+Su futura composición deberá poder mapearse a Product Set / Commercial Offer sin usar el DOM como fuente de verdad.
+
+---
+
+## I-014 — Mobile y desktop se construyen juntos
+
+No se cerrará desktop para adaptar mobile después.
+
+Ambos son parte del mismo build.
+
+---
+
+## I-015 — El repo maestro no se convierte en un cliente
+
+Los clientes reales deberán derivar/adaptar el vertical sin reemplazar `indumentary` por la implementación particular de una única marca.
