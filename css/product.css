@@ -370,6 +370,14 @@
 .favorite-button svg { width: 20px; height: 20px; }
 .favorite-button.is-active svg { fill: var(--ink); }
 
+.modal-backdrop {
+  z-index: 140;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
 .location-modal {
   width: min(520px, 100%);
   padding: 22px;
@@ -444,6 +452,7 @@
     backdrop-filter: blur(12px);
   }
   .mobile-cart-bar .add-cart-button { min-height: 52px; }
+  .modal-backdrop { align-items: end; padding: 0; }
   .location-modal { border-radius: 18px 18px 0 0; padding: 20px 16px calc(20px + env(safe-area-inset-bottom)); }
 }
 
