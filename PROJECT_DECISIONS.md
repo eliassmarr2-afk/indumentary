@@ -178,3 +178,65 @@ Ambos son parte del mismo build.
 ## I-015 — El repo maestro no se convierte en un cliente
 
 Los clientes reales deberán derivar/adaptar el vertical sin reemplazar `indumentary` por la implementación particular de una única marca.
+
+---
+
+## I-016 — La estructura de código separa responsabilidades desde Build 01
+
+Se adopta desde el primer build:
+
+```text
+index.html
+css/
+  base.css
+  home.css
+js/
+  app.js
+  commerce/
+  protocol/
+  config/
+  shared/
+```
+
+La UI no concentra catálogo, carrito, estado de sesión, Protocol Data y configuración en un único archivo.
+
+Esta separación existe para facilitar escala, mantenimiento, reutilización y futura migración a Shopify / Protocol Data.
+
+---
+
+## I-017 — Los assets del Build 01 son provisionales
+
+Las imágenes iniciales son material visual de referencia para revisar layout, proporciones y densidad.
+
+No constituyen los creativos finales del vertical.
+
+Se podrán reemplazar sin modificar la arquitectura de Home.
+
+---
+
+## I-018 — El badge de entrega es demo hasta Logistics live
+
+La tarjeta puede representar visualmente el badge `Llega a tu dirección`, pero mientras Logistics no esté integrado debe marcarse como demo/pending resolution.
+
+El storefront no transforma el mock en promesa logística canónica.
+
+---
+
+## I-019 — Home Build 01 queda materializado para revisión visual
+
+Build 01 incluye:
+
+```text
+header + menu
+session location popup
+provider-decoupled search
+hero
+7 categories
+3 combo cards
+6 product cards
+policy/footer access
+responsive desktop/mobile
+local Event Layer seam
+```
+
+El siguiente movimiento es revisión visual y publicación del preview, no incorporación automática de nuevas superficies.
