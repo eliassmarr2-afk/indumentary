@@ -1,8 +1,8 @@
 # INDUMENTARY — CURRENT WAYPOINT
 
 **Date:** 2026-10-30  
-**Track:** FIRST NICHE SITE / INITIALIZATION COMPLETE  
-**Implementation:** CONSTRUCTION AUTHORIZED / NOT YET STARTED
+**Track:** FIRST NICHE SITE / HOME BUILD 01  
+**Implementation:** HOME BUILD 01 MATERIALIZED / VISUAL REVIEW NEXT
 
 ---
 
@@ -36,7 +36,7 @@ Authority:
 
 `SITE_INITIALIZATION.md`
 
-This PASS authorizes construction on the agreed architecture. It is not a production-readiness certification.
+Construction is authorized. Production readiness is not implied.
 
 ---
 
@@ -66,14 +66,95 @@ SHOPIFY COMPATIBLE
 
 ---
 
-# 4. VISUAL BASE
+# 4. HOME BUILD 01 — MATERIALIZED
+
+Implemented on `main`:
+
+```text
+HEADER
+  hamburger
+  utility logo
+  cart entry
+
+LOCATION SURFACE
+  “¿A dónde lo enviamos?”
+  CP
+  optional address
+  shared session state
+
+SEARCH
+  local/mock catalog now
+  provider-decoupled seam
+
+HERO
+  provisional editorial image
+  wide desktop composition
+  mobile-specific proportion
+
+CATEGORIES
+  Camisetas
+  Pantalones
+  Camperas
+  Gorras y Pilusos
+  Medias
+  Botines
+  Pelotas
+
+COMBOS
+  3 horizontal cards
+  image 1/3
+  content 2/3
+
+PRODUCTS
+  6 cards
+  2-column layout
+  stars
+  delivery demo badge
+  Mercado Pago trust label
+  price section divided by full-width line
+
+FOOTER / POLICY ACCESS
+```
+
+---
+
+# 5. CODE STRUCTURE
+
+```text
+index.html
+
+css/
+  base.css
+  home.css
+
+js/
+  app.js
+  config/
+    site.js
+  commerce/
+    catalog.js
+    cart.js
+  shared/
+    location-state.js
+    events.js
+  protocol/
+    logistics.js
+
+.nojekyll
+```
+
+Only responsibilities that exist in Build 01 were materialized. Tracking/Support/Experience files are not created empty; their boundaries remain documented and will appear when implemented.
+
+---
+
+# 6. VISUAL BASE
 
 ```text
 FONT
 =
 MANROPE
 
-PAGE BACKGROUND
+PAGE
 =
 #EDEDED
 
@@ -98,119 +179,81 @@ DECORATIVE CARD SHADOWS
 NO
 ```
 
+Images are provisional assets for layout review.
+
 ---
 
-# 5. HOME — AGREED FIRST BUILD
+# 7. LOCATION / LOGISTICS
+
+The Home location popup persists in `sessionStorage` and is intentionally separated from Logistics authority.
 
 ```text
-HEADER
-  hamburger
-  utility logo
-  cart
+LOCATION INPUT
+→ SESSION LOCATION CONTEXT
+→ future Logistics Adapter
+→ Protocol Data Logistics
+```
 
-LOCATION SURFACE
-  “¿A dónde lo enviamos?”
-  CP
-  optional address
-  shared session context
+Current Logistics adapter returns `not_integrated` and never invents tariff/promise data.
 
-SEARCH
-  independent product search
-  provider-decoupled
+The green delivery badge is explicitly demo-only until real Logistics resolution exists.
 
-HERO
-  wide ~16:9 campaign image
+---
 
-CATEGORIES
-  Camisetas
-  Pantalones
-  Camperas
-  Gorras y Pilusos
-  Medias
-  Botines
-  Pelotas
+# 8. COMMERCE / SHOPIFY
 
-COMBOS
-  3 horizontal scrollable cards
+Catalog and search currently use mock data through `js/commerce/catalog.js`.
 
-PRODUCTS
-  6 cards
-  2 per desktop row
+The UI does not depend directly on Shopify.
 
-POLICY / FOOTER ACCESS
+Target migration path remains:
+
+```text
+SEARCH / PRODUCT UI
+→ COMMERCE BOUNDARY
+→ SHOPIFY / AUTHORIZED PROVIDER
 ```
 
 ---
 
-# 6. SESSION LOCATION DECISION
+# 9. MEASUREMENT
 
-```text
-HOME LOCATION
-↔
-PRODUCT PAGE LOCATION
-```
+A local Site Event Layer seam is present in:
 
-The same session location context is reused across shipping-aware surfaces.
+`js/shared/events.js`
 
-It does not own tariffs/promises.
+It expresses storefront events without binding the UI to GTM or another transport.
 
-Future authority:
-
-```text
-SESSION LOCATION CONTEXT
-→ SHIPPING ADAPTER
-→ PROTOCOL DATA LOGISTICS
-```
+No live measurement transport is active.
 
 ---
 
-# 7. PROTOCOL DATA
+# 10. PUBLIC PREVIEW
 
-No live Protocol Data integration is active yet.
+The repo contains a static root entrypoint and `.nojekyll` suitable for GitHub Pages.
 
-All relevant capabilities are documented in `PROTOCOL_DATA_READINESS.md` with separate Readiness and Activation dimensions.
-
-Do not implement a live domain contract from memory. Revalidate current Protocol Data documentation before integration.
+GitHub Pages is not yet confirmed active for the repository.
 
 ---
 
-# 8. SHOPIFY
+# 11. NEXT MOVEMENT
 
 ```text
-SHOPIFY
+HOME BUILD 01
 =
-COMPATIBLE / NOT INTEGRATED
+VISUAL REVIEW
 ```
 
-The first build uses mocks while preserving Product / SKU / Set / Offer / Provider Variant separation.
-
----
-
-# 9. CURRENT HOLD
-
-No HTML/CSS/JS has been written yet.
-
-This is intentional: site architecture and composition were agreed before code construction.
-
----
-
-# 10. NEXT MOVEMENT
+Then:
 
 ```text
-HOME FOUNDATION / BUILD 01
+ENABLE / VERIFY PUBLIC PREVIEW
+↓
+REVIEW DESKTOP + MOBILE
+↓
+CORRECT HOME
+↓
+HOME BUILD 01 = ACCEPTED
 ```
 
-Target:
-
-1. establish initial folder/file structure;
-2. implement base visual tokens + Manrope;
-3. implement responsive header + menu;
-4. implement shared location surface/popup with local session mock state;
-5. implement provider-decoupled search UI;
-6. implement hero placeholder;
-7. implement category section;
-8. implement combo cards;
-9. implement six product cards;
-10. publish a public preview for visual iteration.
-
-Before writing code, the exact Build 01 file structure should be agreed and then constructed as complete blocks.
+Do not begin Product Page, live Shopify, or live Protocol Data integration until the Home review is complete unless explicitly authorized.
