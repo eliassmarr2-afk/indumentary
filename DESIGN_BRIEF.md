@@ -19,7 +19,7 @@ La referencia visual inicial se utiliza como inspiración de jerarquía, cards, 
 
 ```text
 PAGE BACKGROUND
-= #EDEDED
+= #F0E9DF
 
 CARD / SURFACE
 = #FFFFFF
@@ -33,6 +33,8 @@ TEXT
 ACCENT
 = restrained / to be defined by final brand
 ```
+
+El fondo general utiliza un beige muy suave para distinguir claramente el canvas de las superficies blancas sin introducir una estética cálida dominante.
 
 El sitio no será “todo oscuro”.
 
@@ -219,6 +221,8 @@ Objetivo visual posterior:
 - label de categoría;
 - navegación clara.
 
+En mobile, los rails horizontales usan el borde físico del viewport como límite de desaparición; el padding general de la página no debe recortar prematuramente los elementos durante el scroll.
+
 ---
 
 ## 11. COMBO SECTION
@@ -237,7 +241,8 @@ Comportamiento:
 
 - horizontal scroll;
 - card ancha y poco alta;
-- relación visual aproximada 16:9.
+- relación visual aproximada 16:9;
+- en mobile el scroll debe desaparecer exactamente en el borde del dispositivo, no dentro del padding de la página.
 
 Composición:
 
@@ -365,6 +370,8 @@ Se diseñará desde el mismo build para:
 - product cards;
 - product page;
 - future public surfaces.
+
+Los carruseles horizontales deben aprovechar el ancho completo del viewport como scrollport. El primer elemento conserva la alineación del contenido, pero los elementos en movimiento no desaparecen antes del borde físico del teléfono.
 
 ---
 
