@@ -1,0 +1,361 @@
+/* PRODUCT COMBO CARDS — visual mock / future Commercial Offer surface */
+.offer-section {
+  overflow: visible;
+}
+
+.offer-section > h2 {
+  margin-bottom: 14px;
+}
+
+.offer-list {
+  display: flex;
+  gap: 14px;
+  margin: 0 -28px;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 16px 28px 8px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.offer-list::-webkit-scrollbar {
+  display: none;
+}
+
+.product-combo-card {
+  position: relative;
+  display: grid;
+  width: min(690px, 88vw);
+  min-width: min(690px, 88vw);
+  min-height: 176px;
+  aspect-ratio: 16 / 7;
+  grid-template-columns: 35% 65%;
+  overflow: visible;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 0 0 1px #e7e0d8;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: box-shadow 150ms ease, transform 150ms ease;
+}
+
+.product-combo-card.is-selected {
+  box-shadow: 0 0 0 3px #2479ff;
+}
+
+.product-combo-card:active {
+  transform: scale(.995);
+}
+
+.product-combo-card__media {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 8px 0 0 8px;
+  background: #eee8e0;
+}
+
+.product-combo-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-combo-card__content {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 14px 15px;
+  border-radius: 0 8px 8px 0;
+  background: #fff;
+}
+
+.product-combo-card__content h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+
+.product-combo-card__content p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 6px 0 8px;
+  color: #74706b;
+  font-size: 10px;
+  line-height: 1.42;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.product-combo-card .stars {
+  font-size: 12px;
+}
+
+.product-combo-card__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.product-combo-card__price {
+  color: #111;
+  font-size: 17px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.product-combo-card__compare {
+  color: #9b9b9b;
+  font-size: 10px;
+  text-decoration: line-through;
+  white-space: nowrap;
+}
+
+.product-combo-card__details {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 5px;
+  margin-top: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #111;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.product-combo-card__details svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.product-combo-card__best {
+  position: absolute;
+  z-index: 6;
+  top: -12px;
+  right: 12px;
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(0,0,0,.22);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+.product-combo-card__best svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+}
+
+.combo-detail-backdrop {
+  position: fixed;
+  z-index: 260;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(10,10,10,.46);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.combo-detail-backdrop[hidden] {
+  display: none !important;
+}
+
+.combo-detail-backdrop.is-open {
+  opacity: 1;
+}
+
+.combo-detail-sheet {
+  width: min(100%, 480px);
+  max-height: min(86vh, 760px);
+  overflow-y: auto;
+  padding: 10px 22px calc(24px + env(safe-area-inset-bottom));
+  border-radius: 28px 28px 0 0;
+  background: #fff;
+  transform: translateY(28px);
+  transition: transform 180ms ease;
+}
+
+.combo-detail-backdrop.is-open .combo-detail-sheet {
+  transform: translateY(0);
+}
+
+.combo-detail-sheet__handle {
+  width: 46px;
+  height: 4px;
+  margin: 0 auto 18px;
+  border-radius: 999px;
+  background: #ddd7d0;
+}
+
+.combo-detail-sheet__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.combo-detail-sheet__top span {
+  color: #7a736c;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.combo-detail-sheet__top h2 {
+  margin: 5px 0 0;
+  font-size: 26px;
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+
+.combo-detail-sheet__close {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #f0ebe5;
+  color: #111;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.combo-detail-sheet__media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-top: 18px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #eee8e0;
+}
+
+.combo-detail-sheet__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.combo-detail-sheet__copy {
+  margin: 16px 0 0;
+  color: #6f6963;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.combo-detail-sheet__list {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.combo-detail-sheet__list li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #4e4945;
+  font-size: 12px;
+}
+
+.combo-detail-sheet__list li::before {
+  content: "✓";
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  place-items: center;
+  border-radius: 50%;
+  background: #edf4ff;
+  color: #2479ff;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.combo-detail-sheet__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #eee8e2;
+}
+
+.combo-detail-sheet__prices strong,
+.combo-detail-sheet__prices span {
+  display: block;
+}
+
+.combo-detail-sheet__prices strong {
+  font-size: 22px;
+}
+
+.combo-detail-sheet__prices span {
+  margin-top: 3px;
+  color: #9a948d;
+  font-size: 11px;
+  text-decoration: line-through;
+}
+
+.combo-detail-sheet__select {
+  min-height: 46px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.combo-detail-sheet__select.is-selected {
+  background: #2479ff;
+}
+
+@media (min-width: 721px) {
+  .product-combo-card__content {
+    padding: 22px 24px;
+  }
+
+  .product-combo-card__content h3 {
+    font-size: 22px;
+  }
+
+  .product-combo-card__content p {
+    font-size: 12px;
+  }
+
+  .product-combo-card__price {
+    font-size: 21px;
+  }
+
+  .product-combo-card__details {
+    font-size: 12px;
+  }
+}
