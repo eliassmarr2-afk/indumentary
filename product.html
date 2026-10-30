@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#e9e0d4" />
-  <title>Producto — Indumentary</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#eee4d7" />
+  <title>Producto · Indumentary</title>
   <meta name="description" content="Detalle de producto de Indumentary, preparado para Shopify y Protocol Data." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -13,141 +13,209 @@
   <link rel="stylesheet" href="./css/product.css" />
 </head>
 <body class="product-body">
-  <main class="product-page-shell" id="productPage">
-    <section class="product-visual" aria-labelledby="productTitle">
-      <a class="hero-control hero-control--back" href="./index.html" aria-label="Volver al inicio">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
-      </a>
+  <div class="product-shell">
+    <header class="product-hero">
+      <img id="productImage" class="product-hero__image" alt="" />
+      <div class="product-hero__shade"></div>
 
-      <button class="hero-control hero-control--share" id="shareButton" type="button" aria-label="Compartir producto">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M8 8l4-4 4 4" /><path d="M5 11v8h14v-8" /></svg>
-      </button>
+      <div class="product-topbar">
+        <a class="round-control" href="./index.html" aria-label="Volver">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </a>
 
-      <div class="product-visual__heading">
-        <span class="product-category" id="productCategory"></span>
-        <h1 id="productTitle"></h1>
-        <p id="productSubtitle"></p>
-      </div>
-
-      <div class="product-image-stage">
-        <img id="mainProductImage" src="" alt="" />
-      </div>
-
-      <div class="price-cutout" aria-label="Precio del producto">
-        <small>Precio</small>
-        <strong id="productPrice"></strong>
-        <span id="productCompare"></span>
-      </div>
-    </section>
-
-    <section class="product-sheet">
-      <div class="product-sheet__topline">
-        <div class="rating-row">
-          <span class="stars" id="productStars" aria-label="5 de 5 estrellas">★★★★★</span>
-          <span id="reviewCount"></span>
+        <div class="product-topbar__actions">
+          <button id="shareButton" class="round-control" type="button" aria-label="Compartir">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.5-4.4M8.2 13.2l7.5 4.4"/></svg>
+          </button>
+          <button id="favoriteButton" class="round-control" type="button" aria-label="Favorito">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+          </button>
         </div>
       </div>
 
-      <div class="thumbnail-rail" id="thumbnailRail" aria-label="Imágenes del producto"></div>
+      <button class="gallery-pill" id="galleryButton" type="button" aria-label="Ver galería">
+        <span class="gallery-pill__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 15-5-5L5 19"/></svg>
+        </span>
+        <span>Ver galería</span>
+      </button>
+    </header>
 
-      <div class="product-options" id="productOptions"></div>
+    <main class="product-sheet">
+      <div class="product-sheet__handle" aria-hidden="true"></div>
+
+      <div id="thumbnailRail" class="thumbnail-rail" aria-label="Imágenes del producto"></div>
+
+      <section class="product-intro">
+        <span id="productCategory" class="product-category">Indumentaria</span>
+        <h1 id="productTitle">Producto</h1>
+        <p id="productSubtitle" class="product-subtitle"></p>
+
+        <div class="product-facts">
+          <span class="fact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.5 6 .9-4.4 4.2 1 6-5.3-2.8-5.3 2.8 1-6-4.4-4.2 6-.9L12 3Z"/></svg>
+            <span id="productRating">4.8</span>
+          </span>
+          <span class="fact-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v11H3z"/><path d="M14 10h4l3 3v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+            <span id="deliveryShort">Entrega disponible</span>
+          </span>
+        </div>
+
+        <div class="social-row">
+          <div class="buyers-cluster">
+            <span class="buyer-avatars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span id="productBuyers" class="buyers-count">420+</span>
+          </div>
+          <button class="reviews-link" type="button" id="reviewsButton">Ver reseñas</button>
+        </div>
+      </section>
+
+      <section class="detail-section" id="detailSection">
+        <h2>Sobre este producto</h2>
+        <p id="productShortDescription"></p>
+        <button id="readMoreButton" class="inline-link" type="button">Leer más</button>
+      </section>
+
+      <section class="variant-section">
+        <h2>Elegí tu variante</h2>
+        <div id="productOptions" class="product-options"></div>
+      </section>
 
       <section class="offer-section" aria-labelledby="offerSectionTitle">
-        <div class="product-section-heading">
-          <span class="section-kicker">OFERTAS DISPONIBLES</span>
-          <h2 id="offerSectionTitle">Elegí cómo comprar</h2>
-        </div>
-        <div class="offer-list" id="offerList"></div>
-        <p class="offer-architecture-note">La presentación puede variar; la composición real pertenece a Protocol Data Product Set y se resuelve mediante bindings explícitos.</p>
+        <h2 id="offerSectionTitle">Ofertas disponibles</h2>
+        <div id="offerList" class="offer-list"></div>
       </section>
 
-      <button class="shipping-surface" id="locationTrigger" type="button" aria-haspopup="dialog">
-        <span class="shipping-surface__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
-        </span>
-        <span class="shipping-surface__copy">
-          <small>ENVÍO</small>
-          <strong id="locationPrimary">¿A dónde lo enviamos?</strong>
-          <span id="locationSecondary">Usá la misma ubicación de tu sesión</span>
-        </span>
-        <svg class="shipping-surface__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
-      </button>
-
-      <div class="trust-strip">
-        <span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5.2 3.4 8.5 8 10 4.6-1.5 8-4.8 8-10V6Z" /><path d="m9 12 2 2 4-4" /></svg>
-          Compra segura con Mercado Pago
-        </span>
-        <span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3Z" /><path d="M14 9h4l3 3v4h-7Z" /><circle cx="7" cy="18" r="2" /><circle cx="17" cy="18" r="2" /></svg>
-          Shipping preparado para Protocol Data
-        </span>
-      </div>
-
-      <button class="add-cart-button add-cart-button--desktop" id="addToCartDesktop" type="button">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1" /><path d="M12 9v5M9.5 11.5h5" /></svg>
-        <span>Agregar al carrito</span>
-      </button>
-
-      <section class="product-content-area">
-        <div class="tabs-sticky-shell" id="tabsStickyShell">
-          <div class="tabs-rail" id="tabsRail" role="tablist" aria-label="Información del producto"></div>
-        </div>
-        <div class="tab-panel rich-content" id="tabPanel" role="tabpanel"></div>
-
-        <section class="description-section" aria-labelledby="descriptionTitle">
-          <div class="description-heading">
-            <span class="section-kicker">CONTENIDO DEL PRODUCTO</span>
-            <h2 id="descriptionTitle">Descripción</h2>
-            <p>Esta superficie renderizará el contenido enriquecido del editor de producto de Shopify.</p>
+      <section class="seller-section">
+        <h2>Vendido por</h2>
+        <div class="seller-row">
+          <div class="seller-identity">
+            <div class="seller-avatar">IND</div>
+            <div>
+              <strong id="sellerName">IND.</strong>
+              <span id="sellerSubtitle">Tienda oficial</span>
+            </div>
           </div>
-          <div class="rich-content product-description" id="productDescription"></div>
-        </section>
+          <div class="seller-actions">
+            <button id="phoneSupportButton" type="button" aria-label="Consultar por teléfono">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c1 .3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
+            </button>
+            <button id="productSupportButton" type="button" aria-label="Consultar por este producto">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/><path d="M8 10h8M8 14h5"/></svg>
+            </button>
+          </div>
+        </div>
       </section>
-    </section>
-  </main>
 
-  <div class="mobile-cart-bar" id="mobileCartBar">
-    <button class="favorite-button" id="favoriteButton" type="button" aria-label="Guardar producto">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" /></svg>
-    </button>
-    <button class="add-cart-button" id="addToCartMobile" type="button">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1" /><path d="M12 9v5M9.5 11.5h5" /></svg>
-      <span>Agregar al carrito</span>
-    </button>
-  </div>
-
-  <button id="cartButton" type="button" hidden aria-hidden="true"></button>
-  <span id="cartCount" hidden>0</span>
-
-  <div class="modal-backdrop" id="locationModal" hidden>
-    <section class="location-modal" role="dialog" aria-modal="true" aria-labelledby="locationTitle">
-      <div class="modal-heading">
+      <section class="delivery-section">
         <div>
-          <span class="eyebrow eyebrow--dark">UBICACIÓN DE ENVÍO</span>
-          <h2 id="locationTitle">¿A dónde lo enviamos?</h2>
+          <h2>Entrega</h2>
+          <p id="deliveryLabel">Envíos disponibles</p>
         </div>
-        <button class="icon-button" id="locationClose" type="button" aria-label="Cerrar">
-          <svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></svg>
-        </button>
+        <button id="locationTrigger" class="inline-link" type="button">Calcular entrega</button>
+      </section>
+
+      <section class="tabs-section">
+        <h2>Información del producto</h2>
+        <div class="tabs-sticky-shell">
+          <div id="tabsRail" class="tabs-rail" role="tablist" aria-label="Información del producto"></div>
+        </div>
+        <div id="tabPanel" class="tab-panel rich-content" role="tabpanel"></div>
+      </section>
+
+      <section class="features-section">
+        <h2>Qué incluye</h2>
+        <div id="featureGrid" class="feature-list"></div>
+      </section>
+
+      <section class="description-section" aria-labelledby="descriptionTitle">
+        <span class="description-eyebrow">CONTENIDO SHOPIFY</span>
+        <h2 id="descriptionTitle">Descripción</h2>
+        <div id="productDescription" class="rich-content product-description"></div>
+      </section>
+    </main>
+
+    <div class="purchase-bar">
+      <div class="purchase-price">
+        <span>Precio total</span>
+        <strong id="productPrice">$ 74.990</strong>
+        <small id="oldPrice">$ 89.990</small>
       </div>
-      <form id="locationForm" novalidate>
-        <label class="field-label" for="postalCode">Código postal</label>
-        <input class="text-field" id="postalCode" name="postalCode" type="text" inputmode="text" autocomplete="postal-code" maxlength="8" placeholder="Ej. 1414 o C1414ABC" required />
-        <small class="field-help">El contexto se comparte con Home. La tarifa real llegará desde Logistics cuando se integre.</small>
+      <button id="addToCart" class="buy-button" type="button">Comprar ahora</button>
+    </div>
 
-        <label class="field-label" for="streetAddress">Dirección <span>opcional</span></label>
-        <input class="text-field" id="streetAddress" name="streetAddress" type="text" autocomplete="street-address" maxlength="120" placeholder="Calle y altura" />
-
-        <div class="modal-actions">
-          <button class="button button--secondary" id="locationCancel" type="button">Cancelar</button>
-          <button class="button button--dark" type="submit">Guardar ubicación</button>
+    <div id="productSupportBackdrop" class="product-support-backdrop" hidden>
+      <section id="productSupportSheet" class="product-support-sheet" role="dialog" aria-modal="true" aria-label="Consulta sobre producto">
+        <div class="product-support-product-header">
+          <div class="product-support-sheet__handle" aria-hidden="true"></div>
+          <div class="product-support-product-header__row">
+            <img id="supportProductImage" alt="" />
+            <div class="product-support-product-header__copy">
+              <strong id="supportProductTitle">Producto</strong>
+              <small id="supportProductPrice"></small>
+            </div>
+            <button id="closeProductSupport" class="product-support-sheet__close" type="button" aria-label="Cerrar">×</button>
+          </div>
         </div>
-      </form>
-    </section>
+
+        <div class="product-support-sheet__body">
+          <div id="productSupportFormView">
+            <form id="productSupportForm" class="product-support-form" novalidate>
+              <div class="product-support-field">
+                <label for="productSupportName">Nombre y Apellido</label>
+                <input id="productSupportName" name="name" type="text" autocomplete="name" placeholder="Nombre completo" />
+                <span id="productSupportNameError" class="product-support-error" hidden></span>
+              </div>
+              <div class="product-support-field">
+                <label for="productSupportEmail">Correo</label>
+                <input id="productSupportEmail" name="email" type="email" autocomplete="email" placeholder="tu@email.com" />
+                <span id="productSupportEmailError" class="product-support-error" hidden></span>
+              </div>
+              <button class="product-support-submit" type="submit">Contactar</button>
+            </form>
+            <p class="product-support-note">Tus datos se usan para identificar esta consulta dentro de la sesión actual.</p>
+          </div>
+
+          <div id="productSupportChatView" class="product-support-chat" hidden>
+            <div class="product-support-chat__notices">
+              <div class="product-support-chat__notice"><p>En esta versión de prueba, el chat se mantiene mientras esta sesión del navegador siga activa.</p></div>
+              <div class="product-support-chat__notice"><p>Si hiciste una compra, no mostraremos información sensible hasta validar tu identidad.</p></div>
+            </div>
+            <div id="productSupportMessages" class="product-support-messages" aria-live="polite"></div>
+            <div id="productSupportQuickQuestions" class="product-support-quick-questions" aria-label="Preguntas sugeridas"></div>
+            <form id="productSupportMessageForm" class="product-support-composer" novalidate>
+              <input id="productSupportMessageInput" type="text" autocomplete="off" maxlength="800" placeholder="Escribí tu mensaje..." aria-label="Escribí tu mensaje" />
+              <button type="submit">Enviar</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="locationBackdrop" class="location-backdrop" hidden>
+      <section class="location-sheet" role="dialog" aria-modal="true" aria-labelledby="locationTitle">
+        <div class="product-support-sheet__handle" aria-hidden="true"></div>
+        <div class="location-sheet__heading">
+          <div>
+            <span>UBICACIÓN DE ENVÍO</span>
+            <h2 id="locationTitle">¿A dónde lo enviamos?</h2>
+          </div>
+          <button id="locationClose" type="button" aria-label="Cerrar">×</button>
+        </div>
+        <form id="locationForm" novalidate>
+          <label for="postalCode">Código postal</label>
+          <input id="postalCode" type="text" maxlength="8" placeholder="Ej. 1414 o C1414ABC" required />
+          <label for="streetAddress">Dirección <span>opcional</span></label>
+          <input id="streetAddress" type="text" maxlength="120" placeholder="Calle y altura" />
+          <button type="submit">Guardar ubicación</button>
+        </form>
+      </section>
+    </div>
+
+    <div id="toast" class="toast product-toast" role="status" aria-live="polite"></div>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script type="module" src="./js/product.js"></script>
 </body>
 </html>
