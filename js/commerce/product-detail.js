@@ -1,17 +1,19 @@
 import { products } from "./catalog.js";
 
+const ARGENTINA_JACKET_FRONT = "https://pl.futbolemotion.com/imagesarticulos/311593/750/chaqueta-adidas-argentina-afa-pre-match-home-mundial-2026-white-white-5.webp";
+const ARGENTINA_JACKET_MODEL = "https://www.innovasport.com/medias/1200Wx1200H-NEW-media-gallery-000000000000403197-01-20260429115430.jpg?context=bWFzdGVyfGltYWdlc3w4MjkwNHxpbWFnZS9qcGVnfGFEaG1MMmhpWkM4eU56WXlNREV6TWpRNE56RTVPQzh4TWpBd1YzZ3hNakF3U0Y5T1JWZGZiV1ZrYVdGZloyRnNiR1Z5ZVY4d01EQXdNREF3TURBd01EQTBNRE14T1RkZk1ERmZNakF5TmpBME1qa3hNVFUwTXpBdWFuQm58NmM5ZmU0OGIxZDBkY2Y2MjFmZDZkZTNkZmQ4NWY0ZTNhOWNhNzU1Njc2MmQzZDhmY2QzMTE4ZDk0MWQyMTgwMA";
+
 const PRODUCT_MEDIA = {
   "prod-001": [
     "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1400&q=86",
     "https://images.unsplash.com/photo-1627225924765-552d49cf47ad?auto=format&fit=crop&w=1400&q=86",
-    "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=1400&q=86",
-    "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1400&q=86"
+    "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=1400&q=86"
   ],
   "prod-002": [
-    "https://assets.adidas.com/images/w_1200,h_1200,f_auto,q_auto,fl_lossy,c_fill,g_auto/8f04704a1740496a97ddf453c8960825_9366/campera-de-seleccion-argentina-26-tiro-all-weather.jpg",
-    "https://assets.adidas.com/images/w_1200,h_1200,f_auto,q_auto,fl_lossy,c_fill,g_auto/a017b7d2f992487bbd90d0bbf8759185_9366/campera-de-presentacion-de-seleccion-argentina-26-tiro.jpg",
-    "https://assets.adidas.com/images/w_1200,h_1200,f_auto,q_auto,fl_lossy,c_fill,g_auto/5c93fd7428264dd59f3fe5f493c0dd8c_9366/parka-de-seleccion-argentina-26-tiro-stadium.jpg",
-    "https://assets.adidas.com/images/w_1200,h_1200,f_auto,q_auto,fl_lossy,c_fill,g_auto/725267277fde47ffa81fd0919e0117ca_9366/campera-de-invierno-de-seleccion-argentina-26.jpg"
+    ARGENTINA_JACKET_FRONT,
+    ARGENTINA_JACKET_MODEL,
+    ARGENTINA_JACKET_FRONT,
+    ARGENTINA_JACKET_MODEL
   ],
   "prod-003": [
     "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=1400&q=86",
@@ -90,13 +92,15 @@ function makeOffers(product) {
 
 function buildDetail(product) {
   const argentinaDemo = product.id === "prod-002";
+  const media = PRODUCT_MEDIA[product.id] || [product.image];
+
   return {
     ...product,
     title: argentinaDemo ? "Campera Selección Argentina" : product.title,
-    subtitle: argentinaDemo ? "Campera técnica · celeste y blanca · fútbol" : product.subtitle,
+    subtitle: argentinaDemo ? "Argentina 2026 · fútbol · hombre" : product.subtitle,
     rating: 5,
     reviewCount: 128,
-    media: (PRODUCT_MEDIA[product.id] || [product.image]).map((src, index) => ({
+    media: media.map((src, index) => ({
       id: `${product.id}-media-${index + 1}`,
       src,
       alt: `${argentinaDemo ? "Campera Selección Argentina" : product.title} · vista ${index + 1}`
@@ -105,12 +109,18 @@ function buildDetail(product) {
       {
         id: "color",
         label: "Color",
-        type: "swatch",
-        values: [
-          { id: "celeste", label: "Celeste", value: "#8ccff2" },
-          { id: "blanco", label: "Blanco", value: "#f7f7f7" },
-          { id: "azul", label: "Azul", value: "#1d4f91" }
-        ]
+        type: "image",
+        values: argentinaDemo ? [
+          { id: "blanco-celeste", label: "Blanco / Celeste", value: "blanco-celeste", image: ARGENTINA_JACKET_FRONT },
+          { id: "vista-modelo", label: "Argentina", value: "argentina", image: ARGENTINA_JACKET_MODEL },
+          { id: "blanco", label: "Blanco", value: "blanco", image: ARGENTINA_JACKET_FRONT },
+          { id: "alternativa", label: "Alternativa", value: "alternativa", image: ARGENTINA_JACKET_MODEL }
+        ] : media.slice(0, 4).map((src, index) => ({
+          id: `color-${index + 1}`,
+          label: `Opción ${index + 1}`,
+          value: `opcion-${index + 1}`,
+          image: src
+        }))
       },
       {
         id: "talle",
