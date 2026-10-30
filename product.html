@@ -26,43 +26,52 @@
     </header>
 
     <main class="product-page-shell" id="productPage">
-      <section class="product-hero-card" aria-labelledby="productTitle">
-        <div class="product-media-column">
+      <div class="product-top-layout">
+        <section class="product-showcase" aria-labelledby="productTitle">
           <div class="product-media-stage">
-            <img id="mainProductImage" src="" alt="" />
+            <a class="floating-action floating-action--back" href="./index.html" aria-label="Volver al catálogo">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+            </a>
+
             <button class="floating-action floating-action--share" id="shareButton" type="button" aria-label="Compartir producto">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M8 8l4-4 4 4" /><path d="M5 11v8h14v-8" /></svg>
             </button>
-          </div>
-          <div class="thumbnail-rail" id="thumbnailRail" aria-label="Imágenes del producto"></div>
-        </div>
 
-        <div class="product-commerce-column">
-          <div class="product-heading-block">
-            <span class="product-category" id="productCategory"></span>
-            <h1 id="productTitle"></h1>
-            <p class="product-subtitle" id="productSubtitle"></p>
-            <div class="rating-row">
-              <span class="stars" id="productStars" aria-label="5 de 5 estrellas">★★★★★</span>
-              <span id="reviewCount"></span>
+            <div class="product-visual-heading">
+              <span class="product-category" id="productCategory"></span>
+              <h1 id="productTitle"></h1>
+              <p class="product-subtitle" id="productSubtitle"></p>
             </div>
-            <div class="product-price-row">
+
+            <img id="mainProductImage" src="" alt="" />
+
+            <div class="price-chip" aria-label="Precio seleccionado">
+              <span>PRECIO</span>
               <strong class="product-price" id="productPrice"></strong>
-              <span class="product-compare" id="productCompare"></span>
+              <small class="product-compare" id="productCompare"></small>
             </div>
+          </div>
+
+          <div class="thumbnail-strip">
+            <div class="thumbnail-rail" id="thumbnailRail" aria-label="Imágenes del producto"></div>
+          </div>
+        </section>
+
+        <section class="product-commerce-sheet" aria-label="Configuración de compra">
+          <div class="rating-row">
+            <span class="stars" id="productStars" aria-label="5 de 5 estrellas">★★★★★</span>
+            <span id="reviewCount"></span>
           </div>
 
           <div class="product-options" id="productOptions"></div>
 
           <section class="offer-section" aria-labelledby="offerSectionTitle">
             <div class="product-section-heading">
-              <div>
-                <span class="section-kicker">OFERTAS DISPONIBLES</span>
-                <h2 id="offerSectionTitle">Elegí cómo comprar</h2>
-              </div>
+              <span class="section-kicker">OFERTAS DISPONIBLES</span>
+              <h2 id="offerSectionTitle">Elegí cómo comprar</h2>
             </div>
             <div class="offer-list" id="offerList"></div>
-            <p class="offer-architecture-note">Demo de presentación: la futura composición real pertenece a Protocol Data Product Set y se resuelve mediante bindings explícitos.</p>
+            <p class="offer-architecture-note">La presentación puede variar; la composición real pertenece a Protocol Data Product Set y se resuelve mediante bindings explícitos.</p>
           </section>
 
           <button class="shipping-surface" id="locationTrigger" type="button" aria-haspopup="dialog">
@@ -92,8 +101,8 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1" /><path d="M12 9v5M9.5 11.5h5" /></svg>
             <span>Agregar al carrito</span>
           </button>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <section class="product-content-area">
         <div class="tabs-sticky-shell" id="tabsStickyShell">
