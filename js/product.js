@@ -114,6 +114,14 @@ function renderOptions() {
 
     const values = option.values.map((value) => {
       const selected = value.id === selectedId;
+
+      if (option.type === "image") {
+        return `
+          <button class="color-image-button${selected ? " is-selected" : "}" type="button" data-option-id="${option.id}" data-value-id="${value.id}" aria-pressed="${selected}" aria-label="${value.label}">
+            <img src="${value.image}" alt="${value.label}" loading="lazy" />
+          </button>`;
+      }
+
       if (option.type === "swatch") {
         return `
           <button class="swatch-button${selected ? " is-selected" : "}" type="button" data-option-id="${option.id}" data-value-id="${value.id}" aria-pressed="${selected}">
@@ -121,6 +129,7 @@ function renderOptions() {
             <span>${value.label}</span>
           </button>`;
       }
+
       return `<button class="option-button${selected ? " is-selected" : "}" type="button" data-option-id="${option.id}" data-value-id="${value.id}" aria-pressed="${selected}">${value.label}</button>`;
     }).join("");
 
@@ -137,9 +146,23 @@ function renderOptions() {
 
 function selectOption(optionId, valueId) {
   const option = product.options.find((item) => item.id === optionId);
-  if (!option?.values.some((value) => value.id === valueId)) return;
+  const selectedValue = option?.values.find((value) => value.id === valueId);
+  if (!selectedValue) return;
+
   state.selectedOptions[optionId] = valueId;
   renderOptions();
+
+  if (option.type === "image" && selectedValue.image) {
+    const media = product.media.find((item) => item.src === selectedValue.image);
+    if (media) {
+      state.mediaId = media.id;
+      renderGallery();
+    } else {
+      elements.mainProductImage.src = selectedValue.image;
+      elements.mainProductImage.alt = selectedValue.label;
+    }
+  }
+
   emitSiteEvent("product_option_selected", {
     productId: product.id,
     optionId,
