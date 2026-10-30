@@ -131,7 +131,7 @@ function renderProducts(list = products) {
   elements.emptyState.hidden = list.length > 0;
 
   elements.productGrid.innerHTML = list.map((product) => `
-    <article class="product-card" data-product-id="${product.id}">
+    <article class="product-card" data-product-id="${product.id}" tabindex="0" role="link" aria-label="Ver ${product.title}">
       <div class="product-card__media">
         <img src="${product.image}" alt="${product.title}" loading="lazy" />
       </div>
@@ -168,6 +168,11 @@ function selectCategory(category) {
   runSearch(category);
   $("#productos")?.scrollIntoView({ behavior: "smooth", block: "start" });
   emitSiteEvent("category_selected", { category });
+}
+
+function openProduct(productId) {
+  emitSiteEvent("product_card_opened", { productId });
+  window.location.href = `./product.html?id=${encodeURIComponent(productId)}`;
 }
 
 async function handleLocationSubmit(event) {
@@ -222,19 +227,25 @@ function bindEvents() {
     const button = event.target.closest("[data-offer]");
     if (!button) return;
     emitSiteEvent("commercial_offer_opened", { offerId: button.dataset.offer, source: "home_combo" });
-    showToast("Oferta demo. La Product Page se construirá en el próximo movimiento.");
+    showToast("Oferta demo. La Combo Page se construirá en el próximo movimiento.");
   });
 
   elements.productGrid.addEventListener("click", (event) => {
     const card = event.target.closest("[data-product-id]");
+    if (card) openProduct(card.dataset.productId);
+  });
+
+  elements.productGrid.addEventListener("keydown", (event) => {
+    if (!["Enter", " "].includes(event.key)) return;
+    const card = event.target.closest("[data-product-id]");
     if (!card) return;
-    emitSiteEvent("product_card_opened", { productId: card.dataset.productId });
-    showToast("Producto demo. La Product Page todavía está reservada.");
+    event.preventDefault();
+    openProduct(card.dataset.productId);
   });
 
   elements.cartButton.addEventListener("click", () => {
     emitSiteEvent("cart_open_requested", { count: getCartCount() });
-    showToast("Carrito preparado arquitectónicamente; su vista se construirá después de la Home.");
+    showToast("Carrito preparado arquitectónicamente; su vista se construirá después.");
   });
 
   $$('[data-category-link]').forEach((link) => link.addEventListener("click", () => {
