@@ -4,14 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#eee4d7" />
-  <meta name="indumentary-build" content="20261030-1801" />
+  <meta name="indumentary-build" content="20261030-1812" />
   <title>Campera Core · Indumentary</title>
   <meta name="description" content="Detalle de producto de Indumentary, preparado para Shopify y Protocol Data." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/base.css?v=20261030-1801" />
-  <link rel="stylesheet" href="./css/product.css?v=20261030-1801" />
+  <link rel="stylesheet" href="./css/base.css?v=20261030-1812" />
+  <link rel="stylesheet" href="./css/product.css?v=20261030-1812" />
+  <link rel="stylesheet" href="./css/product-support-camping.css?v=20261030-1812" />
 </head>
 <body class="product-body">
   <div class="product-shell">
@@ -82,7 +83,7 @@
             <p class="product-support-note">Tus datos se usan para identificar esta consulta dentro de la sesión actual.</p>
           </div>
           <div id="productSupportChatView" class="product-support-chat" hidden>
-            <div class="product-support-chat__notices"><div class="product-support-chat__notice"><p>En esta versión de prueba, el chat se mantiene mientras esta sesión del navegador siga activa.</p></div><div class="product-support-chat__notice"><p>Si hiciste una compra, no mostraremos información sensible hasta validar tu identidad.</p></div></div>
+            <div class="product-support-chat__notices"><div class="product-support-chat__notice"><p>En esta versión de prueba, el chat se mantiene mientras esta sesión del navegador siga activa. Si cerrás la pestaña, puede perderse.</p></div><div class="product-support-chat__notice product-support-chat__notice--security"><p>Si hiciste una compra, no podemos darte información sensible sobre ella hasta validar tu identidad.</p></div></div>
             <div id="productSupportMessages" class="product-support-messages" aria-live="polite"></div>
             <div id="productSupportQuickQuestions" class="product-support-quick-questions" aria-label="Preguntas sugeridas"></div>
             <form id="productSupportMessageForm" class="product-support-composer" novalidate><input id="productSupportMessageInput" type="text" autocomplete="off" maxlength="800" placeholder="Escribí tu mensaje..." aria-label="Escribí tu mensaje" /><button type="submit">Enviar</button></form>
@@ -98,6 +99,7 @@
     <div id="toast" class="toast product-toast" role="status" aria-live="polite"></div>
   </div>
 
-  <script defer src="./js/product-runtime-v4.js?v=20261030-1801"></script>
+  <script defer src="./js/product-runtime-v4.js?v=20261030-1812"></script>
+  <script defer src="./js/product-support-camping-v1.js?v=20261030-1812"></script>
 </body>
 </html>
