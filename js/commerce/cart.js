@@ -1,4 +1,4 @@
-const CART_KEY = "indumentary.cart.v1";
+const CART_KEY = "indumentary.cart.v2";
 
 function readCart() {
   try {
@@ -18,12 +18,31 @@ export function getCartCount() {
   return readCart().reduce((total, item) => total + (Number(item.quantity) || 0), 0);
 }
 
-export function addToCart(productId, quantity = 1) {
-  const items = readCart();
-  const existing = items.find((item) => item.productId === productId);
+function sameCommercialSelection(item, productId, context) {
+  return item.productId === productId
+    && (item.offerId || null) === (context.offerId || null)
+    && (item.providerVariantId || null) === (context.providerVariantId || null)
+    && JSON.stringify(item.selectedOptions || {}) === JSON.stringify(context.selectedOptions || {});
+}
 
-  if (existing) existing.quantity += quantity;
-  else items.push({ productId, quantity });
+export function addToCart(productId, quantity = 1, context = {}) {
+  const items = readCart();
+  const existing = items.find((item) => sameCommercialSelection(item, productId, context));
+
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    items.push({
+      productId,
+      quantity,
+      offerId: context.offerId || null,
+      protocolOfferId: context.protocolOfferId || null,
+      providerVariantId: context.providerVariantId || null,
+      selectedOptions: context.selectedOptions || {},
+      unitPrice: context.unitPrice ?? null,
+      source: context.source || "storefront_mock",
+    });
+  }
 
   writeCart(items);
   return items;

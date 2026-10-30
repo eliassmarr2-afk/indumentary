@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Producto — Indumentary</title>
+  <meta name="description" content="Detalle de producto de Indumentary, preparado para Shopify y Protocol Data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/product.css" />
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header product-global-header">
+      <a class="icon-button icon-button--inverse" href="./index.html" aria-label="Volver al inicio">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+      </a>
+      <a class="utility-logo" href="./index.html" aria-label="Ir al inicio">IND.</a>
+      <button class="cart-button" id="cartButton" type="button" aria-label="Abrir carrito">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1M10 20h.01M17 20h.01" /></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </header>
+
+    <main class="product-page-shell" id="productPage">
+      <section class="product-hero-card" aria-labelledby="productTitle">
+        <div class="product-media-column">
+          <div class="product-media-stage">
+            <img id="mainProductImage" src="" alt="" />
+            <button class="floating-action floating-action--share" id="shareButton" type="button" aria-label="Compartir producto">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M8 8l4-4 4 4" /><path d="M5 11v8h14v-8" /></svg>
+            </button>
+          </div>
+          <div class="thumbnail-rail" id="thumbnailRail" aria-label="Imágenes del producto"></div>
+        </div>
+
+        <div class="product-commerce-column">
+          <div class="product-heading-block">
+            <span class="product-category" id="productCategory"></span>
+            <h1 id="productTitle"></h1>
+            <p class="product-subtitle" id="productSubtitle"></p>
+            <div class="rating-row">
+              <span class="stars" id="productStars" aria-label="5 de 5 estrellas">★★★★★</span>
+              <span id="reviewCount"></span>
+            </div>
+            <div class="product-price-row">
+              <strong class="product-price" id="productPrice"></strong>
+              <span class="product-compare" id="productCompare"></span>
+            </div>
+          </div>
+
+          <div class="product-options" id="productOptions"></div>
+
+          <section class="offer-section" aria-labelledby="offerSectionTitle">
+            <div class="product-section-heading">
+              <div>
+                <span class="section-kicker">OFERTAS DISPONIBLES</span>
+                <h2 id="offerSectionTitle">Elegí cómo comprar</h2>
+              </div>
+            </div>
+            <div class="offer-list" id="offerList"></div>
+            <p class="offer-architecture-note">Demo de presentación: la futura composición real pertenece a Protocol Data Product Set y se resuelve mediante bindings explícitos.</p>
+          </section>
+
+          <button class="shipping-surface" id="locationTrigger" type="button" aria-haspopup="dialog">
+            <span class="shipping-surface__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></svg>
+            </span>
+            <span class="shipping-surface__copy">
+              <small>ENVÍO</small>
+              <strong id="locationPrimary">¿A dónde lo enviamos?</strong>
+              <span id="locationSecondary">Usá la misma ubicación de tu sesión</span>
+            </span>
+            <svg class="shipping-surface__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+          </button>
+
+          <div class="trust-strip">
+            <span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v5c0 5.2 3.4 8.5 8 10 4.6-1.5 8-4.8 8-10V6Z" /><path d="m9 12 2 2 4-4" /></svg>
+              Compra segura con Mercado Pago
+            </span>
+            <span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3Z" /><path d="M14 9h4l3 3v4h-7Z" /><circle cx="7" cy="18" r="2" /><circle cx="17" cy="18" r="2" /></svg>
+              Shipping preparado para Protocol Data
+            </span>
+          </div>
+
+          <button class="add-cart-button add-cart-button--desktop" id="addToCartDesktop" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1" /><path d="M12 9v5M9.5 11.5h5" /></svg>
+            <span>Agregar al carrito</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="product-content-area">
+        <div class="tabs-sticky-shell" id="tabsStickyShell">
+          <div class="tabs-rail" id="tabsRail" role="tablist" aria-label="Información del producto"></div>
+        </div>
+        <div class="tab-panel rich-content" id="tabPanel" role="tabpanel"></div>
+
+        <section class="description-section" aria-labelledby="descriptionTitle">
+          <div class="description-heading">
+            <span class="section-kicker">CONTENIDO DEL PRODUCTO</span>
+            <h2 id="descriptionTitle">Descripción</h2>
+            <p>Esta superficie está reservada para el contenido enriquecido del editor de producto de Shopify.</p>
+          </div>
+          <div class="rich-content product-description" id="productDescription"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div class="mobile-cart-bar" id="mobileCartBar">
+    <button class="favorite-button" id="favoriteButton" type="button" aria-label="Guardar producto">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" /></svg>
+    </button>
+    <button class="add-cart-button" id="addToCartMobile" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 8H6.1" /><path d="M12 9v5M9.5 11.5h5" /></svg>
+      <span>Agregar al carrito</span>
+    </button>
+  </div>
+
+  <div class="modal-backdrop" id="locationModal" hidden>
+    <section class="location-modal" role="dialog" aria-modal="true" aria-labelledby="locationTitle">
+      <div class="modal-heading">
+        <div>
+          <span class="eyebrow eyebrow--dark">UBICACIÓN DE ENVÍO</span>
+          <h2 id="locationTitle">¿A dónde lo enviamos?</h2>
+        </div>
+        <button class="icon-button" id="locationClose" type="button" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></svg>
+        </button>
+      </div>
+      <form id="locationForm" novalidate>
+        <label class="field-label" for="postalCode">Código postal</label>
+        <input class="text-field" id="postalCode" name="postalCode" type="text" inputmode="text" autocomplete="postal-code" maxlength="8" placeholder="Ej. 1414 o C1414ABC" required />
+        <small class="field-help">El contexto se comparte con Home. La tarifa real llegará desde Logistics cuando se integre.</small>
+
+        <label class="field-label" for="streetAddress">Dirección <span>opcional</span></label>
+        <input class="text-field" id="streetAddress" name="streetAddress" type="text" autocomplete="street-address" maxlength="120" placeholder="Calle y altura" />
+
+        <div class="modal-actions">
+          <button class="button button--secondary" id="locationCancel" type="button">Cancelar</button>
+          <button class="button button--dark" type="submit">Guardar ubicación</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./js/product.js"></script>
+</body>
+</html>
