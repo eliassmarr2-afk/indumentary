@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#eee4d7" />
-  <meta name="indumentary-build" content="20261030-1830" />
+  <meta name="indumentary-build" content="20261030-1842" />
   <title>Campera Core · Indumentary</title>
   <meta name="description" content="Detalle de producto de Indumentary, preparado para Shopify y Protocol Data." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="./css/base.css?v=20261030-1812" />
   <link rel="stylesheet" href="./css/product.css?v=20261030-1812" />
   <link rel="stylesheet" href="./css/product-support-camping.css?v=20261030-1812" />
-  <link rel="stylesheet" href="./css/product-combos-v1.css?v=20261030-1830" />
+  <link rel="stylesheet" href="./css/product-combos-v1.css?v=20261030-1842" />
 </head>
 <body class="product-body">
   <div class="product-shell">
@@ -50,7 +50,45 @@
 
       <section class="detail-section" id="detailSection"><h2>Sobre este producto</h2><p id="productShortDescription">Liviana · urbana · entrenamiento. Esta descripción es temporal para visualizar la landing antes de conectar Shopify.</p><button id="readMoreButton" class="inline-link" type="button">Leer más</button></section>
       <section class="variant-section"><h2>Elegí tu variante</h2><div id="productOptions" class="product-options"></div></section>
-      <section class="offer-section" aria-labelledby="offerSectionTitle"><h2 id="offerSectionTitle">Ofertas disponibles</h2><div id="offerList" class="offer-list"></div></section>
+
+      <section class="offer-section" aria-labelledby="offerSectionTitle">
+        <h2 id="offerSectionTitle">Ofertas disponibles</h2>
+        <div id="offerList" class="offer-list">
+          <article class="product-combo-card" data-combo-id="combo-training" role="button" tabindex="0" aria-pressed="false">
+            <div class="product-combo-card__media"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=82" alt="Combo Training" loading="lazy" /></div>
+            <div class="product-combo-card__content">
+              <h3>Combo Training</h3>
+              <p>Camiseta técnica + pantalón + medias deportivas.</p>
+              <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+              <div class="product-combo-card__price-row"><strong class="product-combo-card__price">$ 89.990</strong><span class="product-combo-card__compare">$ 112.000</span></div>
+              <button class="product-combo-card__details" type="button" data-combo-details="combo-training">Ver detalles <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
+          </article>
+
+          <article class="product-combo-card" data-combo-id="combo-street" role="button" tabindex="0" aria-pressed="false">
+            <span class="product-combo-card__best"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13 11 22l-9-9V4h9l9 9Z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>Mejor oferta</span>
+            <div class="product-combo-card__media"><img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=82" alt="Combo Street" loading="lazy" /></div>
+            <div class="product-combo-card__content">
+              <h3>Combo Street</h3>
+              <p>Campera liviana + jogger para usar dentro y fuera del entrenamiento.</p>
+              <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+              <div class="product-combo-card__price-row"><strong class="product-combo-card__price">$ 124.900</strong><span class="product-combo-card__compare">$ 149.500</span></div>
+              <button class="product-combo-card__details" type="button" data-combo-details="combo-street">Ver detalles <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
+          </article>
+
+          <article class="product-combo-card" data-combo-id="combo-match" role="button" tabindex="0" aria-pressed="false">
+            <div class="product-combo-card__media"><img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=82" alt="Combo Match Day" loading="lazy" /></div>
+            <div class="product-combo-card__content">
+              <h3>Combo Match Day</h3>
+              <p>Camiseta + medias + botines para llegar listo a la cancha.</p>
+              <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+              <div class="product-combo-card__price-row"><strong class="product-combo-card__price">$ 159.900</strong><span class="product-combo-card__compare">$ 188.000</span></div>
+              <button class="product-combo-card__details" type="button" data-combo-details="combo-match">Ver detalles <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
+          </article>
+        </div>
+      </section>
 
       <section class="seller-section">
         <h2>Vendido por</h2>
@@ -70,6 +108,17 @@
     </main>
 
     <div class="purchase-bar"><div class="purchase-price"><span>Precio total</span><strong id="productPrice">$ 74.990</strong><small id="oldPrice">$ 89.990</small></div><button id="addToCart" class="buy-button" type="button">Comprar ahora</button></div>
+
+    <div id="comboDetailBackdrop" class="combo-detail-backdrop" hidden>
+      <section class="combo-detail-sheet" role="dialog" aria-modal="true" aria-labelledby="comboDetailTitle">
+        <div class="combo-detail-sheet__handle" aria-hidden="true"></div>
+        <div class="combo-detail-sheet__top"><div><span>DETALLE DE LA OFERTA</span><h2 id="comboDetailTitle">Combo</h2></div><button id="comboDetailClose" class="combo-detail-sheet__close" type="button" aria-label="Cerrar">×</button></div>
+        <div class="combo-detail-sheet__media"><img id="comboDetailImage" alt="" /></div>
+        <p id="comboDetailCopy" class="combo-detail-sheet__copy"></p>
+        <ul id="comboDetailItems" class="combo-detail-sheet__list"></ul>
+        <div class="combo-detail-sheet__footer"><div class="combo-detail-sheet__prices"><strong id="comboDetailPrice"></strong><span id="comboDetailCompare"></span></div><button id="comboDetailSelect" class="combo-detail-sheet__select" type="button">Seleccionar oferta</button></div>
+      </section>
+    </div>
 
     <div id="productSupportBackdrop" class="product-support-backdrop" hidden>
       <section id="productSupportSheet" class="product-support-sheet" role="dialog" aria-modal="true" aria-label="Consulta sobre producto">
@@ -102,6 +151,109 @@
 
   <script defer src="./js/product-runtime-v4.js?v=20261030-1812"></script>
   <script defer src="./js/product-support-camping-v1.js?v=20261030-1812"></script>
-  <script defer src="./js/product-combos-v1.js?v=20261030-1830"></script>
+  <script>
+    (() => {
+      const combos = {
+        "combo-training": { title: "Combo Training", copy: "Camiseta técnica + pantalón + medias deportivas.", price: "$ 89.990", compare: "$ 112.000", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=82", items: ["Camiseta Motion", "Jogger Active", "Medias Crew Pro"] },
+        "combo-street": { title: "Combo Street", copy: "Campera liviana + jogger para usar dentro y fuera del entrenamiento.", price: "$ 124.900", compare: "$ 149.500", image: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=82", items: ["Campera Core", "Jogger Active", "Gorra Pace"] },
+        "combo-match": { title: "Combo Match Day", copy: "Camiseta + medias + botines para llegar listo a la cancha.", price: "$ 159.900", compare: "$ 188.000", image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=82", items: ["Camiseta Motion", "Medias Crew Pro", "Botín Vector"] }
+      };
+
+      const offerList = document.getElementById("offerList");
+      const price = document.getElementById("productPrice");
+      const oldPrice = document.getElementById("oldPrice");
+      const buy = document.getElementById("addToCart");
+      const backdrop = document.getElementById("comboDetailBackdrop");
+      const detailTitle = document.getElementById("comboDetailTitle");
+      const detailImage = document.getElementById("comboDetailImage");
+      const detailCopy = document.getElementById("comboDetailCopy");
+      const detailItems = document.getElementById("comboDetailItems");
+      const detailPrice = document.getElementById("comboDetailPrice");
+      const detailCompare = document.getElementById("comboDetailCompare");
+      const detailSelect = document.getElementById("comboDetailSelect");
+      const close = document.getElementById("comboDetailClose");
+      let selectedId = null;
+      let activeId = null;
+      const productPrice = "$ 74.990";
+      const productCompare = "$ 89.990";
+
+      function selectCombo(id) {
+        selectedId = selectedId === id ? null : id;
+        offerList.querySelectorAll("[data-combo-id]").forEach((card) => {
+          const selected = card.dataset.comboId === selectedId;
+          card.classList.toggle("is-selected", selected);
+          card.setAttribute("aria-pressed", String(selected));
+        });
+        if (selectedId) {
+          const combo = combos[selectedId];
+          price.textContent = combo.price;
+          oldPrice.textContent = combo.compare;
+          buy.textContent = "Agregar combo";
+        } else {
+          price.textContent = productPrice;
+          oldPrice.textContent = productCompare;
+          buy.textContent = "Comprar ahora";
+        }
+        if (activeId) refreshDetailButton();
+      }
+
+      function refreshDetailButton() {
+        const selected = activeId && activeId === selectedId;
+        detailSelect.textContent = selected ? "Oferta seleccionada" : "Seleccionar oferta";
+        detailSelect.classList.toggle("is-selected", Boolean(selected));
+      }
+
+      function openDetails(id) {
+        const combo = combos[id];
+        if (!combo) return;
+        activeId = id;
+        detailTitle.textContent = combo.title;
+        detailImage.src = combo.image;
+        detailImage.alt = combo.title;
+        detailCopy.textContent = combo.copy;
+        detailItems.innerHTML = combo.items.map((item) => `<li>${item}</li>`).join("");
+        detailPrice.textContent = combo.price;
+        detailCompare.textContent = combo.compare;
+        refreshDetailButton();
+        backdrop.hidden = false;
+        requestAnimationFrame(() => backdrop.classList.add("is-open"));
+        document.body.classList.add("no-scroll");
+      }
+
+      function closeDetails() {
+        backdrop.classList.remove("is-open");
+        document.body.classList.remove("no-scroll");
+        setTimeout(() => { if (!backdrop.classList.contains("is-open")) backdrop.hidden = true; }, 190);
+      }
+
+      offerList.addEventListener("click", (event) => {
+        const details = event.target.closest("[data-combo-details]");
+        if (details) {
+          event.stopPropagation();
+          openDetails(details.dataset.comboDetails);
+          return;
+        }
+        const card = event.target.closest("[data-combo-id]");
+        if (card) selectCombo(card.dataset.comboId);
+      });
+
+      offerList.addEventListener("keydown", (event) => {
+        if (!["Enter", " "].includes(event.key)) return;
+        const card = event.target.closest("[data-combo-id]");
+        if (!card) return;
+        event.preventDefault();
+        selectCombo(card.dataset.comboId);
+      });
+
+      detailSelect.addEventListener("click", () => {
+        if (!activeId) return;
+        if (selectedId !== activeId) selectCombo(activeId);
+        refreshDetailButton();
+      });
+      close.addEventListener("click", closeDetails);
+      backdrop.addEventListener("click", (event) => { if (event.target === backdrop) closeDetails(); });
+      window.addEventListener("keydown", (event) => { if (event.key === "Escape" && !backdrop.hidden) closeDetails(); });
+    })();
+  </script>
 </body>
 </html>
