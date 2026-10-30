@@ -8,10 +8,10 @@ const PRODUCT_MEDIA = {
     "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1400&q=86"
   ],
   "prod-002": [
-    "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1400&q=86",
-    "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=1400&q=86",
-    "https://images.unsplash.com/photo-1578681994506-b8f463449011?auto=format&fit=crop&w=1400&q=86",
-    "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=1400&q=86"
+    "https://assets.adidas.com/images/w_1200,h_1200,f_auto,q_auto,fl_lossy,c_fill,g_auto/8f04704a1740496a97ddf453c8960825_9366/campera-de-seleccion-argentina-26-tiro-all-weather.jpg",
+    "https://assets.adidas.com/images/w_1200,h_1200,f_auto,q_auto,fl_lossy,c_fill,g_auto/a017b7d2f992487bbd90d0bbf8759185_9366/campera-de-presentacion-de-seleccion-argentina-26-tiro.jpg",
+    "https://assets.adidas.com/images/w_1200,h_1200,f_auto,q_auto,fl_lossy,c_fill,g_auto/5c93fd7428264dd59f3fe5f493c0dd8c_9366/parka-de-seleccion-argentina-26-tiro-stadium.jpg",
+    "https://assets.adidas.com/images/w_1200,h_1200,f_auto,q_auto,fl_lossy,c_fill,g_auto/725267277fde47ffa81fd0919e0117ca_9366/campera-de-invierno-de-seleccion-argentina-26.jpg"
   ],
   "prod-003": [
     "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=1400&q=86",
@@ -89,14 +89,17 @@ function makeOffers(product) {
 }
 
 function buildDetail(product) {
+  const argentinaDemo = product.id === "prod-002";
   return {
     ...product,
+    title: argentinaDemo ? "Campera Selección Argentina" : product.title,
+    subtitle: argentinaDemo ? "Campera técnica · celeste y blanca · fútbol" : product.subtitle,
     rating: 5,
     reviewCount: 128,
     media: (PRODUCT_MEDIA[product.id] || [product.image]).map((src, index) => ({
       id: `${product.id}-media-${index + 1}`,
       src,
-      alt: `${product.title} · vista ${index + 1}`
+      alt: `${argentinaDemo ? "Campera Selección Argentina" : product.title} · vista ${index + 1}`
     })),
     options: [
       {
@@ -104,9 +107,9 @@ function buildDetail(product) {
         label: "Color",
         type: "swatch",
         values: [
-          { id: "negro", label: "Negro", value: "#111111" },
           { id: "celeste", label: "Celeste", value: "#8ccff2" },
-          { id: "blanco", label: "Blanco", value: "#f7f7f7" }
+          { id: "blanco", label: "Blanco", value: "#f7f7f7" },
+          { id: "azul", label: "Azul", value: "#1d4f91" }
         ]
       },
       {
@@ -118,7 +121,7 @@ function buildDetail(product) {
     ],
     offers: makeOffers(product),
     tabsJson: DEFAULT_TABS_JSON,
-    descriptionHtml: `<h2>${product.title}</h2><p>${product.subtitle}. Esta descripción es contenido demo y está ubicada en el mismo lugar donde, al integrar Shopify, se renderizará el contenido enriquecido del editor de producto.</p><p>La Product Page no conserva esta descripción como verdad propia: el objetivo es que Shopify sea la fuente de contenido y el storefront actúe como renderer.</p><ul><li>Contenido enriquecido compatible con encabezados, listas y enlaces.</li><li>La composición de ofertas no se deduce de este HTML.</li><li>Las imágenes reales serán servidas desde Shopify.</li></ul>`
+    descriptionHtml: `<h2>${argentinaDemo ? "Campera Selección Argentina" : product.title}</h2><p>${argentinaDemo ? "Campera deportiva en referencia albiceleste utilizada como contenido demo de la Product Page." : product.subtitle}. Esta descripción ocupa el mismo lugar donde, al integrar Shopify, se renderizará el contenido enriquecido del editor de producto.</p><p>La Product Page no conserva esta descripción como verdad propia: Shopify será la fuente de contenido y el storefront actuará como renderer.</p><ul><li>Contenido enriquecido compatible con encabezados, listas y enlaces.</li><li>La composición de ofertas no se deduce de este HTML.</li><li>Las imágenes reales serán servidas desde Shopify.</li></ul>`
   };
 }
 
