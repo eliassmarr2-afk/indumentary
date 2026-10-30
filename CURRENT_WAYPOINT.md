@@ -1,8 +1,8 @@
 # INDUMENTARY — CURRENT WAYPOINT
 
 **Date:** 2026-10-30  
-**Track:** FIRST NICHE SITE / HOME BUILD 01  
-**Implementation:** HOME BUILD 01 MATERIALIZED / VISUAL REVIEW NEXT
+**Track:** FIRST NICHE SITE / HOME BUILD 01 ACCEPTED  
+**Implementation:** HOME BUILD 01 ACCEPTED / PRODUCT DETAIL + COMBO DETAIL NEXT
 
 ---
 
@@ -66,9 +66,9 @@ SHOPIFY COMPATIBLE
 
 ---
 
-# 4. HOME BUILD 01 — MATERIALIZED
+# 4. HOME BUILD 01 — ACCEPTED
 
-Implemented on `main`:
+Implemented and visually accepted on `main`:
 
 ```text
 HEADER
@@ -104,6 +104,7 @@ COMBOS
   3 horizontal cards
   image 1/3
   content 2/3
+  mobile full-bleed scrollport
 
 PRODUCTS
   6 cards
@@ -114,6 +115,22 @@ PRODUCTS
   price section divided by full-width line
 
 FOOTER / POLICY ACCESS
+```
+
+Final Home refinements accepted:
+
+```text
+PAGE BACKGROUND
+=
+#F0E9DF
+
+SURFACES
+=
+#FFFFFF
+
+MOBILE HORIZONTAL RAIL CLIPPING
+=
+PHYSICAL VIEWPORT EDGE
 ```
 
 ---
@@ -143,7 +160,7 @@ js/
 .nojekyll
 ```
 
-Only responsibilities that exist in Build 01 were materialized. Tracking/Support/Experience files are not created empty; their boundaries remain documented and will appear when implemented.
+Only responsibilities that exist are materialized. Tracking/Support/Experience files are not created empty; their boundaries remain documented and will appear when implemented.
 
 ---
 
@@ -156,7 +173,7 @@ MANROPE
 
 PAGE
 =
-#EDEDED
+#F0E9DF
 
 SURFACES
 =
@@ -179,7 +196,7 @@ DECORATIVE CARD SHADOWS
 NO
 ```
 
-Images are provisional assets for layout review.
+Images are provisional assets for layout review and may be replaced later without changing structure.
 
 ---
 
@@ -230,30 +247,36 @@ No live measurement transport is active.
 
 # 10. PUBLIC PREVIEW
 
-The repo contains a static root entrypoint and `.nojekyll` suitable for GitHub Pages.
+GitHub Pages is enabled and deployment from `main` is active.
 
-GitHub Pages is not yet confirmed active for the repository.
+Public preview:
+
+```text
+https://eliassmarr2-afk.github.io/indumentary/
+```
 
 ---
 
 # 11. NEXT MOVEMENT
 
 ```text
-HOME BUILD 01
+PRODUCT DETAIL + COMBO DETAIL
 =
-VISUAL REVIEW
+DISCUSSION / STRUCTURE AGREEMENT
 ```
 
-Then:
+Target next sequence:
 
 ```text
-ENABLE / VERIFY PUBLIC PREVIEW
+DEFINE PRODUCT PAGE STRUCTURE
 ↓
-REVIEW DESKTOP + MOBILE
+DEFINE COMBO / OFFER DETAIL STRUCTURE
 ↓
-CORRECT HOME
+AGREE DATA OWNERSHIP + VARIANT / SIZE / COLOR BEHAVIOR
 ↓
-HOME BUILD 01 = ACCEPTED
+AGREE SHIPPING / SESSION LOCATION SURFACE REUSE
+↓
+BUILD 02 AUTHORIZATION
 ```
 
-Do not begin Product Page, live Shopify, or live Protocol Data integration until the Home review is complete unless explicitly authorized.
+Do not begin substantial Product Page or Combo Detail code until their visual and functional structure is explicitly agreed.
