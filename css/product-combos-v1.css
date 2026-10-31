@@ -385,3 +385,134 @@
   .product-combo-card__price { font-size: 21px; }
   .product-combo-card__details { font-size: 12px; }
 }
+
+/* --------------------------------------------------------------------------
+   COMMERCIAL INFO DENSITY / FULL-BLEED HIERARCHY
+   Approved compact pattern inspired by dense marketplace information rows.
+   The runtime owns content and behavior; these rules only control presentation.
+   -------------------------------------------------------------------------- */
+
+.product-commercial-body .commercial-info-stack {
+  position: relative !important;
+  width: calc(100% + 60px) !important;
+  margin-right: -30px !important;
+  margin-left: -30px !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  background: #fff !important;
+}
+
+/* Address keeps the same content alignment as the product sheet. */
+.product-commercial-body .commercial-address-row {
+  gap: 8px !important;
+  padding: 10px 30px 11px !important;
+}
+
+.product-commercial-body .commercial-address-row__label {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.product-commercial-body .commercial-address-row__button {
+  min-height: 40px !important;
+  grid-template-columns: 20px minmax(0, 1fr) 17px !important;
+  gap: 7px !important;
+  padding: 6px 9px !important;
+  border-radius: 5px !important;
+  background: #f2f2f2 !important;
+}
+
+.product-commercial-body .commercial-address-row__icon,
+.product-commercial-body .commercial-address-row__icon svg {
+  width: 19px !important;
+  height: 19px !important;
+}
+
+.product-commercial-body .commercial-address-row__text {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+/* All separators truly reach both lateral edges. */
+.product-commercial-body .commercial-divider {
+  width: 100% !important;
+  height: 1px !important;
+  margin: 0 !important;
+  background: #e9e6e2 !important;
+}
+
+/* The first separator becomes a pastel depth band above Envío gratis. */
+.product-commercial-body .commercial-address-row + .commercial-divider {
+  height: 8px !important;
+  background: #f2efeb !important;
+  border-top: 1px solid #e9e5e0 !important;
+  border-bottom: 1px solid #e9e5e0 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.78), inset 0 -1px 0 rgba(0,0,0,.015) !important;
+}
+
+/* Compact action rows: less vertical space, smaller iconography and chevrons. */
+.product-commercial-body .commercial-action-row {
+  min-height: 54px !important;
+  grid-template-columns: 21px minmax(0, 1fr) 17px !important;
+  gap: 10px !important;
+  padding: 9px 30px !important;
+}
+
+.product-commercial-body .commercial-action-row--delivery {
+  min-height: 64px !important;
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
+}
+
+.product-commercial-body .commercial-action-row__icon,
+.product-commercial-body .commercial-action-row__icon svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.product-commercial-body .commercial-action-row__content strong {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.25 !important;
+}
+
+.product-commercial-body .commercial-action-row--delivery .commercial-action-row__content strong {
+  color: #169b62 !important;
+  font-weight: 600 !important;
+}
+
+.product-commercial-body .commercial-action-row__content > span {
+  margin-top: 3px !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  line-height: 1.35 !important;
+}
+
+.product-commercial-body .commercial-row-chevron,
+.product-commercial-body .commercial-row-chevron svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+.product-commercial-body .commercial-row-chevron {
+  color: #8e8a86 !important;
+}
+
+/* Bottom pastel depth band after the policy/security row. */
+.product-commercial-body .commercial-info-stack::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 8px;
+  background: #f2efeb;
+  border-top: 1px solid #e9e5e0;
+  border-bottom: 1px solid #e9e5e0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.78), inset 0 -1px 0 rgba(0,0,0,.015);
+}
+
+@media (max-width: 380px) {
+  .product-commercial-body .commercial-address-row__label { font-size: 15px !important; }
+  .product-commercial-body .commercial-address-row__text { font-size: 12px !important; }
+  .product-commercial-body .commercial-action-row__content strong { font-size: 13px !important; }
+  .product-commercial-body .commercial-action-row__content > span { font-size: 11px !important; }
+}
