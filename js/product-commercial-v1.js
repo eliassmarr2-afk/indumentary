@@ -1,6 +1,7 @@
 (() => {
   "use strict";
 
+  const LOCATION_KEY = "indumentary.sessionLocation.v1";
   const offerSection = document.querySelector(".offer-section");
   const detailSection = document.querySelector(".detail-section");
   const productPrice = document.querySelector("#productPrice");
@@ -19,11 +20,21 @@
     maximumFractionDigits: 0,
   }).format(Math.max(0, Math.round(value || 0)));
 
+  const readSessionLocation = () => {
+    try {
+      const raw = sessionStorage.getItem(LOCATION_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  };
+
   const section = document.createElement("section");
   section.id = "productCommercialBody";
   section.className = "product-commercial-body";
   section.dataset.presentationSource = "mock-now__shopify-commerce-later";
   section.dataset.shippingAuthority = "mock-now__protocol-logistics-later";
+  section.dataset.locationContext = "storefront-session";
   section.innerHTML = `
     <div class="product-commercial-body__price-block">
       <div class="product-commercial-body__heading-row">
@@ -47,6 +58,18 @@
 
     <div class="product-commercial-body__shipping">
       <p><strong class="is-green">Llega gratis</strong> <span id="commercialDeliveryDay">el lunes</span></p>
+
+      <div class="product-commercial-body__address-row">
+        <span class="product-commercial-body__address-prefix">Enviar a</span>
+        <button id="commercialAddressButton" class="product-commercial-body__address-button" type="button" aria-label="Completar dirección de envío">
+          <span class="product-commercial-body__address-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>
+          </span>
+          <span id="commercialAddressLabel" class="product-commercial-body__address-label">Completar dirección</span>
+          <svg class="product-commercial-body__address-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+
       <button id="commercialDeliveryDetails" type="button" class="product-commercial-body__link">Más detalles y formas de entrega</button>
     </div>
 
@@ -84,9 +107,7 @@
       font-weight: 400;
     }
 
-    .product-commercial-body__price-block {
-      padding-top: 2px;
-    }
+    .product-commercial-body__price-block { padding-top: 2px; }
 
     .product-commercial-body__heading-row {
       display: flex;
@@ -95,7 +116,6 @@
       gap: 16px;
     }
 
-    /* Internal commercial label: intentionally below page-section hierarchy. */
     .product-commercial-body h2 {
       margin: 0 0 11px;
       font-size: clamp(19px, 4.5vw, 22px);
@@ -218,27 +238,92 @@
       line-height: 1.52;
     }
 
-    .product-commercial-body__pickup p + p {
-      margin-top: 7px;
-    }
+    .product-commercial-body__pickup p + p { margin-top: 7px; }
 
     .product-commercial-body .is-green {
       color: #169b62;
       font-weight: 600;
     }
 
-    .product-commercial-body__muted {
-      color: #777;
+    .product-commercial-body__address-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
     }
 
-    .product-commercial-body__muted strong {
-      color: #222;
+    .product-commercial-body__address-prefix {
+      color: #555;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .product-commercial-body__address-button {
+      display: grid;
+      width: 100%;
+      min-width: 0;
+      min-height: 40px;
+      grid-template-columns: 20px minmax(0, 1fr) 16px;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border: 0;
+      border-radius: 5px;
+      background: #f3eee8;
+      color: #333;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .product-commercial-body__address-button:active { background: #ece5dd; }
+
+    .product-commercial-body__address-icon {
+      display: grid;
+      width: 20px;
+      height: 20px;
+      place-items: center;
+      color: #2479ff;
+    }
+
+    .product-commercial-body__address-icon svg,
+    .product-commercial-body__address-chevron {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .product-commercial-body__address-label {
+      min-width: 0;
+      overflow: hidden;
+      color: #3e3e3e;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.25;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .product-commercial-body__address-button.is-empty .product-commercial-body__address-label {
+      color: #2479ff;
       font-weight: 500;
     }
 
+    .product-commercial-body__address-chevron {
+      color: #777;
+    }
+
+    .product-commercial-body__muted { color: #777; }
+    .product-commercial-body__muted strong { color: #222; font-weight: 500; }
+
     .product-commercial-body__link {
       display: inline-block;
-      margin-top: 3px;
+      margin-top: 6px;
       padding: 0;
       border: 0;
       background: transparent;
@@ -261,6 +346,8 @@
   const commercialDiscount = section.querySelector("#commercialDiscount");
   const commercialInstallments = section.querySelector("#commercialInstallments");
   const commercialTaxFree = section.querySelector("#commercialTaxFree");
+  const addressButton = section.querySelector("#commercialAddressButton");
+  const addressLabel = section.querySelector("#commercialAddressLabel");
 
   const syncCommercialPricing = () => {
     const current = parseMoney(productPrice?.textContent);
@@ -277,7 +364,28 @@
     commercialTaxFree.textContent = money(current / 1.21);
   };
 
+  const syncAddress = () => {
+    const location = readSessionLocation();
+    const label = location?.visibleLabel || "Completar dirección";
+    addressLabel.textContent = label;
+    addressButton.classList.toggle("is-empty", !location);
+    addressButton.setAttribute(
+      "aria-label",
+      location ? `Cambiar dirección de envío. Actual: ${label}` : "Completar dirección de envío"
+    );
+  };
+
+  const openSharedLocationFlow = () => {
+    const current = readSessionLocation();
+    const postalCode = document.querySelector("#postalCode");
+    const streetAddress = document.querySelector("#streetAddress");
+    if (postalCode) postalCode.value = current?.postalCode || "";
+    if (streetAddress) streetAddress.value = current?.address || "";
+    document.querySelector("#locationTrigger")?.click();
+  };
+
   syncCommercialPricing();
+  syncAddress();
 
   if (productPrice) {
     new MutationObserver(syncCommercialPricing).observe(productPrice, {
@@ -294,9 +402,15 @@
     });
   }
 
-  section.querySelector("#commercialDeliveryDetails")?.addEventListener("click", () => {
-    document.querySelector("#locationTrigger")?.click();
-  });
+  addressButton?.addEventListener("click", openSharedLocationFlow);
+  window.addEventListener("indumentary:location-change", syncAddress);
+
+  const locationForm = document.querySelector("#locationForm");
+  locationForm?.addEventListener("submit", () => {
+    window.setTimeout(syncAddress, 0);
+  }, true);
+
+  section.querySelector("#commercialDeliveryDetails")?.addEventListener("click", openSharedLocationFlow);
 
   section.querySelector("#commercialMapLink")?.addEventListener("click", () => {
     const toast = document.querySelector("#toast");
