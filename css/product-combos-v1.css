@@ -1,4 +1,4 @@
-/* PRODUCT COMBO CARDS — visual mock / future Commercial Offer surface */
+/* PRODUCT COMBO CARD — single visual mock / future Commercial Offer surface */
 .offer-section {
   overflow: visible;
 }
@@ -8,25 +8,22 @@
 }
 
 .offer-list {
-  display: flex;
-  gap: 14px;
-  margin: 0 -28px;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding: 16px 28px 8px;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
+  display: block;
+  margin: 0;
+  overflow: visible;
+  padding: 16px 0 8px;
 }
 
-.offer-list::-webkit-scrollbar {
-  display: none;
+/* Product Page shows ONE offer card. Additional mock offers stay out of the visual surface. */
+.offer-list .product-combo-card:not(:first-child) {
+  display: none !important;
 }
 
 .product-combo-card {
   position: relative;
   display: grid;
-  width: min(690px, 88vw);
-  min-width: min(690px, 88vw);
+  width: 100%;
+  min-width: 0;
   min-height: 176px;
   aspect-ratio: 16 / 7;
   grid-template-columns: 35% 65%;
@@ -35,7 +32,6 @@
   background: #fff;
   box-shadow: 0 0 0 1px #e7e0d8;
   cursor: pointer;
-  scroll-snap-align: start;
   transition: box-shadow 150ms ease, transform 150ms ease;
 }
 
@@ -45,6 +41,30 @@
 
 .product-combo-card:active {
   transform: scale(.995);
+}
+
+/* Visible toggle on the center-right of the card. */
+.product-combo-card::after {
+  content: "";
+  position: absolute;
+  z-index: 8;
+  top: 50%;
+  right: 14px;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #bdbdbd;
+  border-radius: 50%;
+  background: #e7e7e7;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  transform: translateY(-50%);
+  transition: background 150ms ease, border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+  pointer-events: none;
+}
+
+.product-combo-card.is-selected::after {
+  border-color: #2479ff;
+  background: #2479ff;
+  box-shadow: 0 0 0 4px rgba(36,121,255,.12), 0 2px 6px rgba(36,121,255,.24);
 }
 
 .product-combo-card__media {
@@ -65,7 +85,7 @@
   min-width: 0;
   flex-direction: column;
   justify-content: center;
-  padding: 14px 15px;
+  padding: 14px 54px 14px 15px;
   border-radius: 0 8px 8px 0;
   background: #fff;
 }
@@ -138,20 +158,42 @@
   stroke-width: 2;
 }
 
-.product-combo-card__best {
+/* The single visible card always carries the best-offer widget. */
+.offer-list .product-combo-card:first-child::before {
+  content: "✦  Mejor oferta";
   position: absolute;
-  z-index: 6;
-  top: -12px;
+  z-index: 9;
+  top: -13px;
   right: 12px;
   display: inline-flex;
-  min-height: 28px;
+  min-height: 29px;
+  align-items: center;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: #169b62;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(22,155,98,.28);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+/* Keep any explicit legacy badge green as well. */
+.product-combo-card__best {
+  position: absolute;
+  z-index: 9;
+  top: -13px;
+  right: 12px;
+  display: inline-flex;
+  min-height: 29px;
   align-items: center;
   gap: 6px;
-  padding: 0 10px;
+  padding: 0 11px;
   border-radius: 999px;
-  background: #111;
+  background: #169b62;
   color: #fff;
-  box-shadow: 0 8px 18px rgba(0,0,0,.22);
+  box-shadow: 0 8px 18px rgba(22,155,98,.28);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: .01em;
@@ -340,7 +382,7 @@
 
 @media (min-width: 721px) {
   .product-combo-card__content {
-    padding: 22px 24px;
+    padding: 22px 66px 22px 24px;
   }
 
   .product-combo-card__content h3 {
