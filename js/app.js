@@ -75,7 +75,6 @@ function openLocationModal() {
   elements.streetAddress.value = current?.address || "";
   elements.locationModal.hidden = false;
   document.body.classList.add("no-scroll");
-  requestAnimationFrame(() => elements.postalCode.focus());
   emitSiteEvent("shipping_location_opened");
 }
 
@@ -184,7 +183,6 @@ async function handleLocationSubmit(event) {
 
   if (!isValid) {
     showToast("Ingresá un CP de 4 dígitos o un CPA completo.");
-    elements.postalCode.focus();
     return;
   }
 
