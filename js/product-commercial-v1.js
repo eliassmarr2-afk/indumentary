@@ -77,13 +77,15 @@
 
     .product-commercial-body {
       width: 100%;
-      margin: 0 0 34px;
+      margin: 0 0 36px;
       padding: 0 2px;
       color: #111;
+      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-weight: 400;
     }
 
     .product-commercial-body__price-block {
-      padding: 2px 0 0;
+      padding-top: 2px;
     }
 
     .product-commercial-body__heading-row {
@@ -93,18 +95,21 @@
       gap: 16px;
     }
 
+    /* Internal commercial label: intentionally below page-section hierarchy. */
     .product-commercial-body h2 {
-      margin: 0 0 12px;
-      font-size: clamp(24px, 5vw, 30px);
-      line-height: 1.08;
-      letter-spacing: -.035em;
+      margin: 0 0 11px;
+      font-size: clamp(19px, 4.5vw, 22px);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -.022em;
     }
 
     .product-commercial-body__old-price {
-      margin-bottom: 2px;
-      color: #8b8b8b;
-      font-size: 18px;
-      line-height: 1.2;
+      margin-bottom: 3px;
+      color: #929292;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.3;
       text-decoration: line-through;
     }
 
@@ -116,36 +121,38 @@
     }
 
     .product-commercial-body__price-row > strong {
-      font-size: clamp(32px, 8vw, 44px);
-      font-weight: 700;
-      line-height: 1;
-      letter-spacing: -.045em;
+      font-size: clamp(30px, 7vw, 38px);
+      font-weight: 600;
+      line-height: 1.03;
+      letter-spacing: -.035em;
     }
 
     .product-commercial-body__discount {
       display: inline-flex;
-      min-height: 28px;
+      min-height: 25px;
       align-items: center;
       padding: 0 7px;
       border-radius: 4px;
       background: #169b62;
       color: #fff;
-      font-size: 14px;
-      font-weight: 800;
+      font-size: 12px;
+      font-weight: 700;
       line-height: 1;
     }
 
     .product-commercial-body__installments {
-      margin: 8px 0 0;
-      font-size: 18px;
-      line-height: 1.35;
+      margin: 9px 0 0;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.45;
     }
 
     .product-commercial-body__tax {
       margin: 4px 0 0;
       color: #858585;
-      font-size: 14px;
-      line-height: 1.45;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.5;
     }
 
     .product-commercial-body__payment-link {
@@ -154,7 +161,7 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 9px;
-      margin: 17px 0 0;
+      margin: 18px 0 0;
       padding: 0;
       border: 0;
       background: transparent;
@@ -165,8 +172,9 @@
     .product-commercial-body__payment-link > strong,
     .product-commercial-body__link {
       color: #2479ff;
-      font-size: 16px;
-      font-weight: 800;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.35;
     }
 
     .product-commercial-body__payment-icons {
@@ -176,19 +184,19 @@
 
     .product-commercial-body__payment-icons i {
       display: grid;
-      width: 29px;
-      height: 29px;
+      width: 28px;
+      height: 28px;
       margin-left: -3px;
       place-items: center;
       border: 1px solid #ddd;
       border-radius: 50%;
       background: #fff;
-      color: #333;
-      box-shadow: 0 1px 3px rgba(0,0,0,.06);
-      font-size: 8px;
+      color: #444;
+      box-shadow: 0 1px 3px rgba(0,0,0,.05);
+      font-size: 7px;
       font-style: normal;
-      font-weight: 900;
-      letter-spacing: -.04em;
+      font-weight: 700;
+      letter-spacing: 0;
     }
 
     .product-commercial-body__payment-icons i:first-child { margin-left: 0; }
@@ -205,8 +213,9 @@
     .product-commercial-body__shipping p,
     .product-commercial-body__pickup p {
       margin: 0;
-      font-size: 17px;
-      line-height: 1.45;
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.52;
     }
 
     .product-commercial-body__pickup p + p {
@@ -215,7 +224,7 @@
 
     .product-commercial-body .is-green {
       color: #169b62;
-      font-weight: 800;
+      font-weight: 600;
     }
 
     .product-commercial-body__muted {
