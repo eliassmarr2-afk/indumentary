@@ -69,7 +69,7 @@
   transform: scale(.995);
 }
 
-/* Visible selectable toggle on the center-right of the card. */
+/* Radio-style selector: empty gray ring when OFF. */
 .product-combo-card::after {
   content: "";
   position: absolute;
@@ -78,19 +78,24 @@
   right: 14px;
   width: 24px;
   height: 24px;
-  border: 2px solid #bdbdbd;
+  box-sizing: border-box;
+  border: 2px solid #b9b9b9;
   border-radius: 50%;
-  background: #e7e7e7;
+  background: #fff;
   box-shadow: 0 1px 4px rgba(0,0,0,.08);
   transform: translateY(-50%);
   transition: background 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
   pointer-events: none;
 }
 
+/* ON: blue outer ring + white inner ring + blue center dot. */
 .product-combo-card.is-selected::after {
   border-color: #2479ff;
   background: #2479ff;
-  box-shadow: 0 0 0 4px rgba(36,121,255,.12), 0 2px 6px rgba(36,121,255,.24);
+  box-shadow:
+    inset 0 0 0 5px #fff,
+    0 0 0 3px rgba(36,121,255,.10),
+    0 2px 6px rgba(36,121,255,.20);
 }
 
 .product-combo-card__media {
