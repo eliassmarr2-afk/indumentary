@@ -764,7 +764,6 @@
     deliveryBackdrop.hidden = false;
     requestAnimationFrame(() => deliveryBackdrop.classList.add("is-open"));
     document.body.classList.add("no-scroll");
-    window.setTimeout(() => (currentFocusTarget() || postalInput).focus(), 80);
   };
 
   const closeDeliverySheet = () => {
@@ -773,12 +772,6 @@
     window.setTimeout(() => {
       if (!deliveryBackdrop.classList.contains("is-open")) deliveryBackdrop.hidden = true;
     }, 190);
-  };
-
-  const currentFocusTarget = () => {
-    if (!postalInput.value.trim()) return postalInput;
-    if (!addressInput.value.trim()) return addressInput;
-    return addressInput;
   };
 
   const pinIcon = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>`;
@@ -837,12 +830,10 @@
     const cleanAddress = String(addressValue || "").trim();
     if (!/^(?:\d{4}|[A-Z]\d{4}[A-Z]{3})$/.test(postalCode)) {
       toast("Ingresá un código postal válido.");
-      postalInput.focus();
       return null;
     }
     if (!cleanAddress) {
       toast("Ingresá una dirección.");
-      addressInput.focus();
       return null;
     }
 
@@ -887,7 +878,6 @@
     if (!button) return;
     postalInput.value = button.dataset.postalCode;
     postalSuggestions.hidden = true;
-    addressInput.focus();
     if (addressInput.value.trim()) renderAddressSuggestions();
   });
 
@@ -908,18 +898,15 @@
   clearPostal.addEventListener("click", () => {
     postalInput.value = "";
     postalSuggestions.hidden = true;
-    postalInput.focus();
   });
 
   clearAddress.addEventListener("click", () => {
     addressInput.value = "";
     addressSuggestions.hidden = true;
-    addressInput.focus();
   });
 
   changeAddressButton.addEventListener("click", () => {
-    addressInput.focus();
-    addressInput.select();
+    deliveryBackdrop.querySelector(".delivery-autocomplete")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   moreDetailsButton.addEventListener("click", () => {
