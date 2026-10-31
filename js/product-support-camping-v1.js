@@ -436,3 +436,6 @@
     openSupport();
   }
 })();
+
+const productCommercialModuleUrl = new URL("./product-commercial-v1.js?v=20261031-1347", document.currentScript.src);
+import(productCommercialModuleUrl.href).catch(() => {});
