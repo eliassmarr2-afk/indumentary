@@ -1,17 +1,41 @@
-/* PRODUCT COMBO CARD — single visual mock / future Commercial Offer surface */
+/* PRODUCT OFFER CARD — single visual mock / future Commercial Offer surface */
+
+/* Order the direct product surfaces so the single offer appears immediately
+   above "Sobre este producto", matching the approved mobile composition. */
+.product-sheet {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-sheet__handle { order: 0; }
+.thumbnail-rail { order: 1; }
+.product-intro { order: 2; }
+.offer-section { order: 3; }
+.detail-section { order: 4; }
+.variant-section { order: 5; }
+.seller-section { order: 6; }
+.delivery-section { order: 7; }
+.tabs-section { order: 8; }
+.features-section { order: 9; }
+.description-section { order: 10; }
+
 .offer-section {
+  width: 100%;
+  margin: 24px 0 30px;
   overflow: visible;
 }
 
+/* No carousel / no offer-section title: this surface is one offer card only. */
 .offer-section > h2 {
-  margin-bottom: 14px;
+  display: none;
 }
 
 .offer-list {
   display: block;
+  width: 100%;
   margin: 0;
   overflow: visible;
-  padding: 16px 0 8px;
+  padding: 16px 0 0;
 }
 
 /* Product Page shows ONE offer card. Combo Street is the visual best-offer mock. */
@@ -23,14 +47,16 @@
   position: relative;
   display: grid;
   width: 100%;
+  max-width: 690px;
   min-width: 0;
   min-height: 176px;
   aspect-ratio: 16 / 7;
   grid-template-columns: 35% 65%;
+  margin: 0 auto;
   overflow: visible;
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 0 0 1px #e7e0d8;
+  box-shadow: 0 0 0 1.5px #d7d7d7;
   cursor: pointer;
   transition: box-shadow 150ms ease, transform 150ms ease;
 }
@@ -110,7 +136,10 @@
 }
 
 .product-combo-card .stars {
+  color: #111;
   font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .06em;
 }
 
 .product-combo-card__price-row {
@@ -199,13 +228,8 @@
   transition: opacity 180ms ease;
 }
 
-.combo-detail-backdrop[hidden] {
-  display: none !important;
-}
-
-.combo-detail-backdrop.is-open {
-  opacity: 1;
-}
+.combo-detail-backdrop[hidden] { display: none !important; }
+.combo-detail-backdrop.is-open { opacity: 1; }
 
 .combo-detail-sheet {
   width: min(100%, 480px);
@@ -218,9 +242,7 @@
   transition: transform 180ms ease;
 }
 
-.combo-detail-backdrop.is-open .combo-detail-sheet {
-  transform: translateY(0);
-}
+.combo-detail-backdrop.is-open .combo-detail-sheet { transform: translateY(0); }
 
 .combo-detail-sheet__handle {
   width: 46px;
@@ -328,14 +350,8 @@
 }
 
 .combo-detail-sheet__prices strong,
-.combo-detail-sheet__prices span {
-  display: block;
-}
-
-.combo-detail-sheet__prices strong {
-  font-size: 22px;
-}
-
+.combo-detail-sheet__prices span { display: block; }
+.combo-detail-sheet__prices strong { font-size: 22px; }
 .combo-detail-sheet__prices span {
   margin-top: 3px;
   color: #9a948d;
@@ -355,28 +371,12 @@
   font-weight: 800;
 }
 
-.combo-detail-sheet__select.is-selected {
-  background: #2479ff;
-}
+.combo-detail-sheet__select.is-selected { background: #2479ff; }
 
 @media (min-width: 721px) {
-  .product-combo-card__content {
-    padding: 22px 66px 22px 24px;
-  }
-
-  .product-combo-card__content h3 {
-    font-size: 22px;
-  }
-
-  .product-combo-card__content p {
-    font-size: 12px;
-  }
-
-  .product-combo-card__price {
-    font-size: 21px;
-  }
-
-  .product-combo-card__details {
-    font-size: 12px;
-  }
+  .product-combo-card__content { padding: 22px 66px 22px 24px; }
+  .product-combo-card__content h3 { font-size: 22px; }
+  .product-combo-card__content p { font-size: 12px; }
+  .product-combo-card__price { font-size: 21px; }
+  .product-combo-card__details { font-size: 12px; }
 }
