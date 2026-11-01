@@ -18,6 +18,8 @@
 
   if (!offerList) return;
 
+  const OFFER_HINT_DISMISSED_KEY = "indumentary.offerDetailsHintDismissed.v3";
+
   const combo = {
     id: "combo-street",
     title: "Combo Street",
@@ -37,23 +39,45 @@
   const productBasePrice = purchasePrice?.textContent || "$ 74.990";
   const productBaseCompare = oldPrice?.textContent || "$ 89.990";
   let selected = false;
-  let hintDismissed = false;
   let hintObserver = null;
 
+  const isHintDismissed = () => {
+    try {
+      return sessionStorage.getItem(OFFER_HINT_DISMISSED_KEY) === "1";
+    } catch {
+      return false;
+    }
+  };
+
+  const dismissHintForSession = () => {
+    try {
+      sessionStorage.setItem(OFFER_HINT_DISMISSED_KEY, "1");
+    } catch {}
+  };
+
   function installStyles() {
-    document.getElementById("productOfferOverlayV2Styles")?.remove();
+    document.getElementById("productOfferOverlayV3Styles")?.remove();
     const style = document.createElement("style");
-    style.id = "productOfferOverlayV2Styles";
+    style.id = "productOfferOverlayV3Styles";
     style.textContent = `
       #offerList {
+        position: relative !important;
+        overflow: visible !important;
+      }
+
+      #offerList .product-combo-card-wrap {
+        position: relative !important;
+        width: calc(100% + 36px) !important;
+        margin-left: -18px !important;
+        margin-right: -18px !important;
         overflow: visible !important;
       }
 
       #offerList .product-combo-card {
-        width: calc(100% + 36px) !important;
+        display: grid !important;
+        width: 100% !important;
         max-width: none !important;
-        margin-left: -18px !important;
-        margin-right: -18px !important;
+        margin: 0 !important;
         overflow: visible !important;
       }
 
@@ -63,9 +87,9 @@
         top: calc(100% + 8px) !important;
         right: 0 !important;
         display: flex !important;
+        min-height: 34px !important;
         align-items: center !important;
         gap: 8px !important;
-        min-height: 34px !important;
         padding: 7px 8px 7px 11px !important;
         margin: 0 !important;
         border: 0 !important;
@@ -122,7 +146,7 @@
       }
 
       @media (min-width: 721px) {
-        #offerList .product-combo-card {
+        #offerList .product-combo-card-wrap {
           width: 100% !important;
           margin-left: auto !important;
           margin-right: auto !important;
@@ -134,39 +158,41 @@
 
   function cardMarkup() {
     return `
-      <article class="product-combo-card${selected ? " is-selected" : "}" data-combo-id="${combo.id}" role="button" tabindex="0" aria-pressed="${selected}">
-        <span class="product-combo-card__best">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13 11 22l-9-9V4h9l9 9Z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>
-          Mejor oferta
-        </span>
+      <div class="product-combo-card-wrap" data-offer-wrap>
+        <article class="product-combo-card${selected ? " is-selected" : "}" data-combo-id="${combo.id}" role="button" tabindex="0" aria-pressed="${selected}">
+          <span class="product-combo-card__best">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13 11 22l-9-9V4h9l9 9Z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>
+            Mejor oferta
+          </span>
+
+          <div class="product-combo-card__media">
+            <img src="${combo.image}" alt="${combo.title}" loading="lazy" />
+          </div>
+          <div class="product-combo-card__content">
+            <h3>${combo.title}</h3>
+            <p>${combo.subtitle}</p>
+            <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
+            <div class="product-combo-card__price-row">
+              <strong class="product-combo-card__price">${money(combo.price)}</strong>
+              <span class="product-combo-card__compare">${money(combo.compareAt)}</span>
+            </div>
+            <button class="product-combo-card__details" type="button" data-combo-details>
+              Ver detalles
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </article>
 
         <aside class="product-combo-card__hint" data-offer-hint aria-live="polite">
           <span>Mirá los detalles de la oferta</span>
           <button type="button" data-offer-hint-close aria-label="Cerrar sugerencia">×</button>
         </aside>
-
-        <div class="product-combo-card__media">
-          <img src="${combo.image}" alt="${combo.title}" loading="lazy" />
-        </div>
-        <div class="product-combo-card__content">
-          <h3>${combo.title}</h3>
-          <p>${combo.subtitle}</p>
-          <div class="stars" aria-label="5 de 5 estrellas">★★★★★</div>
-          <div class="product-combo-card__price-row">
-            <strong class="product-combo-card__price">${money(combo.price)}</strong>
-            <span class="product-combo-card__compare">${money(combo.compareAt)}</span>
-          </div>
-          <button class="product-combo-card__details" type="button" data-combo-details>
-            Ver detalles
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-          </button>
-        </div>
-      </article>
+      </div>
     `;
   }
 
   function revealHint() {
-    if (hintDismissed) return;
+    if (isHintDismissed()) return;
     const hint = offerList.querySelector("[data-offer-hint]");
     if (hint) hint.classList.add("is-visible");
   }
@@ -174,10 +200,11 @@
   function mountHintTrigger() {
     hintObserver?.disconnect();
     hintObserver = null;
-    if (hintDismissed) return;
+    if (isHintDismissed()) return;
 
+    const wrap = offerList.querySelector("[data-offer-wrap]");
     const card = offerList.querySelector("[data-combo-id]");
-    if (!card) return;
+    if (!wrap || !card) return;
 
     const rect = card.getBoundingClientRect();
     const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
@@ -198,7 +225,7 @@
       hintObserver = null;
     }, { threshold: 0.08 });
 
-    hintObserver.observe(card);
+    hintObserver.observe(wrap);
   }
 
   function render() {
@@ -284,7 +311,7 @@
     if (closeHint) {
       event.preventDefault();
       event.stopPropagation();
-      hintDismissed = true;
+      dismissHintForSession();
       hintObserver?.disconnect();
       hintObserver = null;
       closeHint.closest("[data-offer-hint]")?.remove();
