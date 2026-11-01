@@ -18,8 +18,7 @@
 
   if (!offerList) return;
 
-  const OFFER_HINT_DISMISSED_KEY = "indumentary.offerDetailsHintDismissed.v4";
-
+  const HINT_KEY = "indumentary.offerDetailsHintDismissed.v5";
   const combo = {
     id: "combo-street",
     title: "Combo Street",
@@ -40,93 +39,74 @@
   const productBaseCompare = oldPrice?.textContent || "$ 89.990";
   let selected = false;
   let hint = null;
-  let hintRevealTimer = null;
-  let hintFrame = null;
 
-  const isHintDismissed = () => {
-    try {
-      return sessionStorage.getItem(OFFER_HINT_DISMISSED_KEY) === "1";
-    } catch {
-      return false;
-    }
-  };
+  function hintDismissed() {
+    try { return sessionStorage.getItem(HINT_KEY) === "1"; }
+    catch { return false; }
+  }
 
-  const dismissHintForSession = () => {
-    try {
-      sessionStorage.setItem(OFFER_HINT_DISMISSED_KEY, "1");
-    } catch {}
-  };
+  function dismissHint() {
+    try { sessionStorage.setItem(HINT_KEY, "1"); } catch {}
+    if (hint) hint.remove();
+    hint = null;
+  }
 
   function installStyles() {
-    document.getElementById("productOfferOverlayV4Styles")?.remove();
+    document.getElementById("productOfferHardfixV5")?.remove();
     const style = document.createElement("style");
-    style.id = "productOfferOverlayV4Styles";
+    style.id = "productOfferHardfixV5";
     style.textContent = `
       #offerList {
+        position: relative !important;
         overflow: visible !important;
       }
 
       #offerList .product-combo-card-wrap {
         position: relative !important;
-        width: calc(100% + 36px) !important;
-        margin-left: -18px !important;
-        margin-right: -18px !important;
+        width: calc(100% + 40px) !important;
+        max-width: none !important;
+        margin-left: -20px !important;
+        margin-right: -20px !important;
         overflow: visible !important;
       }
 
       #offerList .product-combo-card {
-        display: grid !important;
         width: 100% !important;
         max-width: none !important;
         margin: 0 !important;
-        overflow: visible !important;
       }
 
-      .product-offer-hint-portal {
-        position: fixed !important;
-        z-index: 9999 !important;
-        display: flex;
-        min-height: 36px;
-        align-items: center;
-        gap: 8px;
-        padding: 7px 8px 7px 11px;
-        margin: 0;
-        border: 1px solid rgba(17,17,17,.05);
-        border-radius: 5px;
-        background: #fff;
-        color: #111;
-        box-shadow: 0 6px 18px rgba(0,0,0,.16), 0 1px 3px rgba(0,0,0,.08);
-        opacity: 0;
-        transform: translateY(5px);
-        transition: opacity 170ms ease, transform 170ms ease;
-        pointer-events: none;
-        white-space: nowrap;
+      .offer-details-callout-v5 {
+        position: absolute !important;
+        z-index: 10000 !important;
+        display: flex !important;
+        min-height: 36px !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 8px 9px 8px 12px !important;
+        border: 1px solid rgba(0,0,0,.06) !important;
+        border-radius: 5px !important;
+        background: #fff !important;
+        color: #111 !important;
+        box-shadow: 0 7px 18px rgba(0,0,0,.16), 0 2px 5px rgba(0,0,0,.08) !important;
+        font-family: "Manrope", system-ui, sans-serif !important;
+        white-space: nowrap !important;
       }
 
-      .product-offer-hint-portal[hidden] {
-        display: none !important;
-      }
-
-      .product-offer-hint-portal::before {
+      .offer-details-callout-v5::before {
         content: "";
         position: absolute;
-        top: -8px;
-        right: 30px;
-        width: 14px;
-        height: 14px;
-        border-top: 1px solid rgba(17,17,17,.05);
-        border-left: 1px solid rgba(17,17,17,.05);
+        top: -7px;
+        right: 32px;
+        width: 13px;
+        height: 13px;
+        border-top: 1px solid rgba(0,0,0,.06);
+        border-left: 1px solid rgba(0,0,0,.06);
         background: #fff;
         transform: rotate(45deg);
       }
 
-      .product-offer-hint-portal.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-      }
-
-      .product-offer-hint-portal > span {
+      .offer-details-callout-v5 span {
         position: relative;
         z-index: 1;
         font-size: 10px;
@@ -134,7 +114,7 @@
         line-height: 1.2;
       }
 
-      .product-offer-hint-portal button {
+      .offer-details-callout-v5 button {
         position: relative;
         z-index: 1;
         display: grid;
@@ -150,7 +130,6 @@
         cursor: pointer;
         font-family: inherit;
         font-size: 14px;
-        font-weight: 500;
         line-height: 1;
       }
 
@@ -160,10 +139,6 @@
           margin-left: auto !important;
           margin-right: auto !important;
         }
-
-        .product-offer-hint-portal > span {
-          font-size: 11px;
-        }
       }
     `;
     document.head.appendChild(style);
@@ -171,13 +146,12 @@
 
   function cardMarkup() {
     return `
-      <div class="product-combo-card-wrap" data-offer-wrap>
+      <div class="product-combo-card-wrap">
         <article class="product-combo-card${selected ? " is-selected" : "}" data-combo-id="${combo.id}" role="button" tabindex="0" aria-pressed="${selected}">
           <span class="product-combo-card__best">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13 11 22l-9-9V4h9l9 9Z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>
             Mejor oferta
           </span>
-
           <div class="product-combo-card__media">
             <img src="${combo.image}" alt="${combo.title}" loading="lazy" />
           </div>
@@ -199,12 +173,26 @@
     `;
   }
 
-  function ensureHintPortal() {
-    if (hint?.isConnected) return hint;
+  function positionHint() {
+    if (!hint || hintDismissed()) return;
+    const card = offerList.querySelector(".product-combo-card");
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+    const width = hint.offsetWidth || 190;
+    const viewportLeft = Math.max(8, rect.right - width);
+
+    hint.style.left = `${Math.round(window.scrollX + viewportLeft)}px`;
+    hint.style.top = `${Math.round(window.scrollY + rect.bottom + 9)}px`;
+  }
+
+  function mountHint() {
+    document.querySelectorAll(".product-offer-hint-portal, .offer-details-callout-v5").forEach((node) => node.remove());
+    hint = null;
+    if (hintDismissed()) return;
+
     hint = document.createElement("aside");
-    hint.className = "product-offer-hint-portal";
-    hint.hidden = true;
-    hint.setAttribute("aria-live", "polite");
+    hint.className = "offer-details-callout-v5";
     hint.innerHTML = `
       <span>Mirá los detalles de la oferta</span>
       <button type="button" aria-label="Cerrar sugerencia">×</button>
@@ -212,77 +200,19 @@
     hint.querySelector("button")?.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
-      dismissHintForSession();
-      hideHint();
+      dismissHint();
     });
     document.body.appendChild(hint);
-    return hint;
-  }
 
-  function hideHint() {
-    if (hintRevealTimer) {
-      window.clearTimeout(hintRevealTimer);
-      hintRevealTimer = null;
-    }
-    if (!hint) return;
-    hint.classList.remove("is-visible");
-    hint.hidden = true;
-  }
-
-  function positionHint() {
-    hintFrame = null;
-    if (isHintDismissed()) {
-      hideHint();
-      return;
-    }
-
-    const card = offerList.querySelector("[data-combo-id]");
-    if (!card) {
-      hideHint();
-      return;
-    }
-
-    const rect = card.getBoundingClientRect();
-    const cardVisible = rect.bottom > 0 && rect.top < window.innerHeight;
-    if (!cardVisible) {
-      hideHint();
-      return;
-    }
-
-    const portal = ensureHintPortal();
-    portal.hidden = false;
-    portal.style.visibility = "hidden";
-    portal.classList.add("is-visible");
-
-    const hintWidth = portal.offsetWidth;
-    const left = Math.min(
-      window.innerWidth - hintWidth - 10,
-      Math.max(10, rect.right - hintWidth - 2)
-    );
-    const top = rect.bottom + 8;
-
-    portal.style.left = `${Math.round(left)}px`;
-    portal.style.top = `${Math.round(top)}px`;
-    portal.style.visibility = "visible";
-  }
-
-  function scheduleHintPosition() {
-    if (hintFrame) return;
-    hintFrame = window.requestAnimationFrame(positionHint);
-  }
-
-  function armHint() {
-    if (isHintDismissed()) return;
-    if (hintRevealTimer) window.clearTimeout(hintRevealTimer);
-    hintRevealTimer = window.setTimeout(() => {
-      hintRevealTimer = null;
-      scheduleHintPosition();
-    }, 120);
+    requestAnimationFrame(() => {
+      positionHint();
+      requestAnimationFrame(positionHint);
+    });
   }
 
   function render() {
     offerList.innerHTML = cardMarkup();
-    armHint();
+    mountHint();
   }
 
   function updatePurchaseState() {
@@ -309,7 +239,6 @@
     selected = forceSelected === null ? !selected : Boolean(forceSelected);
     render();
     updatePurchaseState();
-    scheduleHintPosition();
   }
 
   function openDetails() {
@@ -327,7 +256,6 @@
       detailSelect.textContent = selected ? "Oferta seleccionada" : "Seleccionar oferta";
       detailSelect.classList.toggle("is-selected", selected);
     }
-    hideHint();
     detailBackdrop.hidden = false;
     requestAnimationFrame(() => detailBackdrop.classList.add("is-open"));
     document.body.classList.add("no-scroll");
@@ -339,7 +267,6 @@
     document.body.classList.remove("no-scroll");
     setTimeout(() => {
       if (!detailBackdrop.classList.contains("is-open")) detailBackdrop.hidden = true;
-      armHint();
     }, 190);
   }
 
@@ -395,9 +322,7 @@
   window.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && detailBackdrop && !detailBackdrop.hidden) closeDetails();
   });
-
-  window.addEventListener("scroll", scheduleHintPosition, { passive: true });
-  window.addEventListener("resize", scheduleHintPosition);
+  window.addEventListener("resize", () => requestAnimationFrame(positionHint));
 
   addToCart?.addEventListener("click", (event) => {
     if (!selected) return;
@@ -407,7 +332,6 @@
   }, true);
 
   installStyles();
-  ensureHintPortal();
   render();
   updatePurchaseState();
 })();
