@@ -2,6 +2,7 @@
   "use strict";
 
   const offerList = document.getElementById("offerList");
+  const offerSection = document.querySelector(".offer-section");
   const purchasePrice = document.getElementById("productPrice");
   const oldPrice = document.getElementById("oldPrice");
   const addToCart = document.getElementById("addToCart");
@@ -16,9 +17,9 @@
   const detailSelect = document.getElementById("comboDetailSelect");
   const detailClose = document.getElementById("comboDetailClose");
 
-  if (!offerList) return;
+  if (!offerList || !offerSection) return;
 
-  const HINT_KEY = "indumentary.offerDetailsHintDismissed.v5";
+  const HINT_KEY = "indumentary.offerDetailsHintDismissed.v6";
   const combo = {
     id: "combo-street",
     title: "Combo Street",
@@ -38,24 +39,22 @@
   const productBasePrice = purchasePrice?.textContent || "$ 74.990";
   const productBaseCompare = oldPrice?.textContent || "$ 89.990";
   let selected = false;
-  let hint = null;
 
   function hintDismissed() {
     try { return sessionStorage.getItem(HINT_KEY) === "1"; }
     catch { return false; }
   }
 
-  function dismissHint() {
-    try { sessionStorage.setItem(HINT_KEY, "1"); } catch {}
-    if (hint) hint.remove();
-    hint = null;
-  }
-
   function installStyles() {
-    document.getElementById("productOfferHardfixV5")?.remove();
+    document.getElementById("productOfferHardfixV6")?.remove();
     const style = document.createElement("style");
-    style.id = "productOfferHardfixV5";
+    style.id = "productOfferHardfixV6";
     style.textContent = `
+      .offer-section {
+        position: relative !important;
+        overflow: visible !important;
+      }
+
       #offerList {
         position: relative !important;
         overflow: visible !important;
@@ -63,10 +62,10 @@
 
       #offerList .product-combo-card-wrap {
         position: relative !important;
-        width: calc(100% + 40px) !important;
+        width: calc(100% + 44px) !important;
         max-width: none !important;
-        margin-left: -20px !important;
-        margin-right: -20px !important;
+        margin-left: -22px !important;
+        margin-right: -22px !important;
         overflow: visible !important;
       }
 
@@ -76,37 +75,39 @@
         margin: 0 !important;
       }
 
-      .offer-details-callout-v5 {
+      .offer-details-callout-v6 {
         position: absolute !important;
-        z-index: 10000 !important;
+        z-index: 80 !important;
+        top: calc(100% + 6px) !important;
+        right: -22px !important;
         display: flex !important;
         min-height: 36px !important;
         align-items: center !important;
         gap: 8px !important;
         padding: 8px 9px 8px 12px !important;
-        border: 1px solid rgba(0,0,0,.06) !important;
+        border: 1px solid rgba(0,0,0,.07) !important;
         border-radius: 5px !important;
         background: #fff !important;
         color: #111 !important;
-        box-shadow: 0 7px 18px rgba(0,0,0,.16), 0 2px 5px rgba(0,0,0,.08) !important;
+        box-shadow: 0 8px 20px rgba(0,0,0,.15), 0 2px 5px rgba(0,0,0,.07) !important;
         font-family: "Manrope", system-ui, sans-serif !important;
         white-space: nowrap !important;
       }
 
-      .offer-details-callout-v5::before {
+      .offer-details-callout-v6::before {
         content: "";
         position: absolute;
         top: -7px;
         right: 32px;
         width: 13px;
         height: 13px;
-        border-top: 1px solid rgba(0,0,0,.06);
-        border-left: 1px solid rgba(0,0,0,.06);
+        border-top: 1px solid rgba(0,0,0,.07);
+        border-left: 1px solid rgba(0,0,0,.07);
         background: #fff;
         transform: rotate(45deg);
       }
 
-      .offer-details-callout-v5 span {
+      .offer-details-callout-v6 span {
         position: relative;
         z-index: 1;
         font-size: 10px;
@@ -114,7 +115,7 @@
         line-height: 1.2;
       }
 
-      .offer-details-callout-v5 button {
+      .offer-details-callout-v6 button {
         position: relative;
         z-index: 1;
         display: grid;
@@ -138,6 +139,9 @@
           width: 100% !important;
           margin-left: auto !important;
           margin-right: auto !important;
+        }
+        .offer-details-callout-v6 {
+          right: 0 !important;
         }
       }
     `;
@@ -173,45 +177,46 @@
     `;
   }
 
-  function positionHint() {
-    if (!hint || hintDismissed()) return;
+  function applyCardWidth() {
+    const wrap = offerList.querySelector(".product-combo-card-wrap");
     const card = offerList.querySelector(".product-combo-card");
-    if (!card) return;
-
-    const rect = card.getBoundingClientRect();
-    const width = hint.offsetWidth || 190;
-    const viewportLeft = Math.max(8, rect.right - width);
-
-    hint.style.left = `${Math.round(window.scrollX + viewportLeft)}px`;
-    hint.style.top = `${Math.round(window.scrollY + rect.bottom + 9)}px`;
+    if (wrap) {
+      wrap.style.setProperty("width", "calc(100% + 44px)", "important");
+      wrap.style.setProperty("margin-left", "-22px", "important");
+      wrap.style.setProperty("margin-right", "-22px", "important");
+      wrap.style.setProperty("overflow", "visible", "important");
+    }
+    if (card) {
+      card.style.setProperty("width", "100%", "important");
+      card.style.setProperty("max-width", "none", "important");
+      card.style.setProperty("margin", "0", "important");
+    }
   }
 
   function mountHint() {
-    document.querySelectorAll(".product-offer-hint-portal, .offer-details-callout-v5").forEach((node) => node.remove());
-    hint = null;
+    offerSection.querySelectorAll(".offer-details-callout-v6").forEach((node) => node.remove());
     if (hintDismissed()) return;
 
-    hint = document.createElement("aside");
-    hint.className = "offer-details-callout-v5";
+    const hint = document.createElement("aside");
+    hint.className = "offer-details-callout-v6";
     hint.innerHTML = `
       <span>Mirá los detalles de la oferta</span>
       <button type="button" aria-label="Cerrar sugerencia">×</button>
     `;
+
     hint.querySelector("button")?.addEventListener("click", (event) => {
       event.preventDefault();
       event.stopPropagation();
-      dismissHint();
+      try { sessionStorage.setItem(HINT_KEY, "1"); } catch {}
+      hint.remove();
     });
-    document.body.appendChild(hint);
 
-    requestAnimationFrame(() => {
-      positionHint();
-      requestAnimationFrame(positionHint);
-    });
+    offerSection.appendChild(hint);
   }
 
   function render() {
     offerList.innerHTML = cardMarkup();
+    applyCardWidth();
     mountHint();
   }
 
@@ -322,7 +327,6 @@
   window.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && detailBackdrop && !detailBackdrop.hidden) closeDetails();
   });
-  window.addEventListener("resize", () => requestAnimationFrame(positionHint));
 
   addToCart?.addEventListener("click", (event) => {
     if (!selected) return;
