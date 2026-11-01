@@ -18,7 +18,7 @@
 
   if (!offerList) return;
 
-  const OFFER_HINT_DISMISSED_KEY = "indumentary.offerDetailsHintDismissed.v3";
+  const OFFER_HINT_DISMISSED_KEY = "indumentary.offerDetailsHintDismissed.v4";
 
   const combo = {
     id: "combo-street",
@@ -39,7 +39,9 @@
   const productBasePrice = purchasePrice?.textContent || "$ 74.990";
   const productBaseCompare = oldPrice?.textContent || "$ 89.990";
   let selected = false;
-  let hintObserver = null;
+  let hint = null;
+  let hintRevealTimer = null;
+  let hintFrame = null;
 
   const isHintDismissed = () => {
     try {
@@ -56,12 +58,11 @@
   };
 
   function installStyles() {
-    document.getElementById("productOfferOverlayV3Styles")?.remove();
+    document.getElementById("productOfferOverlayV4Styles")?.remove();
     const style = document.createElement("style");
-    style.id = "productOfferOverlayV3Styles";
+    style.id = "productOfferOverlayV4Styles";
     style.textContent = `
       #offerList {
-        position: relative !important;
         overflow: visible !important;
       }
 
@@ -81,22 +82,20 @@
         overflow: visible !important;
       }
 
-      #offerList .product-combo-card__hint {
-        position: absolute !important;
-        z-index: 90 !important;
-        top: calc(100% + 8px) !important;
-        right: 0 !important;
-        display: flex !important;
-        min-height: 34px !important;
-        align-items: center !important;
-        gap: 8px !important;
-        padding: 7px 8px 7px 11px !important;
-        margin: 0 !important;
-        border: 0 !important;
-        border-radius: 5px !important;
-        background: #fff !important;
-        color: #111 !important;
-        box-shadow: 0 5px 16px rgba(0,0,0,.15), 0 1px 3px rgba(0,0,0,.08) !important;
+      .product-offer-hint-portal {
+        position: fixed !important;
+        z-index: 9999 !important;
+        display: flex;
+        min-height: 36px;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 8px 7px 11px;
+        margin: 0;
+        border: 1px solid rgba(17,17,17,.05);
+        border-radius: 5px;
+        background: #fff;
+        color: #111;
+        box-shadow: 0 6px 18px rgba(0,0,0,.16), 0 1px 3px rgba(0,0,0,.08);
         opacity: 0;
         transform: translateY(5px);
         transition: opacity 170ms ease, transform 170ms ease;
@@ -104,31 +103,40 @@
         white-space: nowrap;
       }
 
-      #offerList .product-combo-card__hint::before {
+      .product-offer-hint-portal[hidden] {
+        display: none !important;
+      }
+
+      .product-offer-hint-portal::before {
         content: "";
         position: absolute;
-        top: -7px;
-        right: 28px;
-        width: 0;
-        height: 0;
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-        border-bottom: 8px solid #fff;
+        top: -8px;
+        right: 30px;
+        width: 14px;
+        height: 14px;
+        border-top: 1px solid rgba(17,17,17,.05);
+        border-left: 1px solid rgba(17,17,17,.05);
+        background: #fff;
+        transform: rotate(45deg);
       }
 
-      #offerList .product-combo-card__hint.is-visible {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-        pointer-events: auto !important;
+      .product-offer-hint-portal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
       }
 
-      #offerList .product-combo-card__hint span {
+      .product-offer-hint-portal > span {
+        position: relative;
+        z-index: 1;
         font-size: 10px;
         font-weight: 600;
         line-height: 1.2;
       }
 
-      #offerList .product-combo-card__hint button {
+      .product-offer-hint-portal button {
+        position: relative;
+        z-index: 1;
         display: grid;
         width: 20px;
         height: 20px;
@@ -139,10 +147,11 @@
         border-radius: 50%;
         background: #f1efec;
         color: #666;
-        font: inherit;
-        font-size: 14px;
-        line-height: 1;
         cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1;
       }
 
       @media (min-width: 721px) {
@@ -150,6 +159,10 @@
           width: 100% !important;
           margin-left: auto !important;
           margin-right: auto !important;
+        }
+
+        .product-offer-hint-portal > span {
+          font-size: 11px;
         }
       }
     `;
@@ -182,55 +195,94 @@
             </button>
           </div>
         </article>
-
-        <aside class="product-combo-card__hint" data-offer-hint aria-live="polite">
-          <span>Mirá los detalles de la oferta</span>
-          <button type="button" data-offer-hint-close aria-label="Cerrar sugerencia">×</button>
-        </aside>
       </div>
     `;
   }
 
-  function revealHint() {
-    if (isHintDismissed()) return;
-    const hint = offerList.querySelector("[data-offer-hint]");
-    if (hint) hint.classList.add("is-visible");
+  function ensureHintPortal() {
+    if (hint?.isConnected) return hint;
+    hint = document.createElement("aside");
+    hint.className = "product-offer-hint-portal";
+    hint.hidden = true;
+    hint.setAttribute("aria-live", "polite");
+    hint.innerHTML = `
+      <span>Mirá los detalles de la oferta</span>
+      <button type="button" aria-label="Cerrar sugerencia">×</button>
+    `;
+    hint.querySelector("button")?.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      dismissHintForSession();
+      hideHint();
+    });
+    document.body.appendChild(hint);
+    return hint;
   }
 
-  function mountHintTrigger() {
-    hintObserver?.disconnect();
-    hintObserver = null;
-    if (isHintDismissed()) return;
+  function hideHint() {
+    if (hintRevealTimer) {
+      window.clearTimeout(hintRevealTimer);
+      hintRevealTimer = null;
+    }
+    if (!hint) return;
+    hint.classList.remove("is-visible");
+    hint.hidden = true;
+  }
 
-    const wrap = offerList.querySelector("[data-offer-wrap]");
+  function positionHint() {
+    hintFrame = null;
+    if (isHintDismissed()) {
+      hideHint();
+      return;
+    }
+
     const card = offerList.querySelector("[data-combo-id]");
-    if (!wrap || !card) return;
+    if (!card) {
+      hideHint();
+      return;
+    }
 
     const rect = card.getBoundingClientRect();
-    const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0;
-    if (alreadyVisible) {
-      window.setTimeout(revealHint, 120);
+    const cardVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+    if (!cardVisible) {
+      hideHint();
       return;
     }
 
-    if (!("IntersectionObserver" in window)) {
-      revealHint();
-      return;
-    }
+    const portal = ensureHintPortal();
+    portal.hidden = false;
+    portal.style.visibility = "hidden";
+    portal.classList.add("is-visible");
 
-    hintObserver = new IntersectionObserver((entries, observer) => {
-      if (!entries.some((entry) => entry.isIntersecting)) return;
-      revealHint();
-      observer.disconnect();
-      hintObserver = null;
-    }, { threshold: 0.08 });
+    const hintWidth = portal.offsetWidth;
+    const left = Math.min(
+      window.innerWidth - hintWidth - 10,
+      Math.max(10, rect.right - hintWidth - 2)
+    );
+    const top = rect.bottom + 8;
 
-    hintObserver.observe(wrap);
+    portal.style.left = `${Math.round(left)}px`;
+    portal.style.top = `${Math.round(top)}px`;
+    portal.style.visibility = "visible";
+  }
+
+  function scheduleHintPosition() {
+    if (hintFrame) return;
+    hintFrame = window.requestAnimationFrame(positionHint);
+  }
+
+  function armHint() {
+    if (isHintDismissed()) return;
+    if (hintRevealTimer) window.clearTimeout(hintRevealTimer);
+    hintRevealTimer = window.setTimeout(() => {
+      hintRevealTimer = null;
+      scheduleHintPosition();
+    }, 120);
   }
 
   function render() {
     offerList.innerHTML = cardMarkup();
-    mountHintTrigger();
+    armHint();
   }
 
   function updatePurchaseState() {
@@ -257,6 +309,7 @@
     selected = forceSelected === null ? !selected : Boolean(forceSelected);
     render();
     updatePurchaseState();
+    scheduleHintPosition();
   }
 
   function openDetails() {
@@ -274,6 +327,7 @@
       detailSelect.textContent = selected ? "Oferta seleccionada" : "Seleccionar oferta";
       detailSelect.classList.toggle("is-selected", selected);
     }
+    hideHint();
     detailBackdrop.hidden = false;
     requestAnimationFrame(() => detailBackdrop.classList.add("is-open"));
     document.body.classList.add("no-scroll");
@@ -285,6 +339,7 @@
     document.body.classList.remove("no-scroll");
     setTimeout(() => {
       if (!detailBackdrop.classList.contains("is-open")) detailBackdrop.hidden = true;
+      armHint();
     }, 190);
   }
 
@@ -307,17 +362,6 @@
   }
 
   offerList.addEventListener("click", (event) => {
-    const closeHint = event.target.closest("[data-offer-hint-close]");
-    if (closeHint) {
-      event.preventDefault();
-      event.stopPropagation();
-      dismissHintForSession();
-      hintObserver?.disconnect();
-      hintObserver = null;
-      closeHint.closest("[data-offer-hint]")?.remove();
-      return;
-    }
-
     if (event.target.closest("[data-combo-details]")) {
       event.preventDefault();
       event.stopPropagation();
@@ -352,6 +396,9 @@
     if (event.key === "Escape" && detailBackdrop && !detailBackdrop.hidden) closeDetails();
   });
 
+  window.addEventListener("scroll", scheduleHintPosition, { passive: true });
+  window.addEventListener("resize", scheduleHintPosition);
+
   addToCart?.addEventListener("click", (event) => {
     if (!selected) return;
     event.preventDefault();
@@ -360,6 +407,7 @@
   }, true);
 
   installStyles();
+  ensureHintPortal();
   render();
   updatePurchaseState();
 })();
