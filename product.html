@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#eee4d7" />
-  <meta name="indumentary-build" content="20261101-1731" />
+  <meta name="indumentary-build" content="20261101-1832" />
   <title>Campera Core · Indumentary</title>
   <meta name="description" content="Detalle de producto de Indumentary, preparado para Shopify y Protocol Data." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="./css/product.css?v=20261030-1812" />
   <link rel="stylesheet" href="./css/product-support-camping.css?v=20261030-1812" />
   <link rel="stylesheet" href="./css/product-combos-v1.css?v=20261031-2145" />
+  <link rel="stylesheet" href="./css/product-offer-callout-v1.css?v=20261101-1832" />
 </head>
 <body class="product-body">
   <div class="product-shell">
@@ -80,6 +81,10 @@
             </div>
           </article>
         </div>
+        <aside id="offerDetailsCallout" class="offer-details-callout-persistent" aria-live="polite">
+          <span class="offer-details-callout-persistent__text">Mirá los detalles de la oferta</span>
+          <button id="offerDetailsCalloutClose" class="offer-details-callout-persistent__close" type="button" aria-label="Cerrar sugerencia">×</button>
+        </aside>
       </section>
 
       <section class="seller-section">
@@ -144,6 +149,7 @@
   <script defer src="./js/product-runtime-v4.js?v=20261030-1812"></script>
   <script defer src="./js/product-support-camping-v1.js?v=20261030-1812"></script>
   <script defer src="./js/product-combos-v1.js?v=20261101-1731"></script>
+  <script defer src="./js/product-offer-callout-v1.js?v=20261101-1832"></script>
   <script defer src="./js/product-commercial-v1.js?v=20261031-2145"></script>
 </body>
 </html>
