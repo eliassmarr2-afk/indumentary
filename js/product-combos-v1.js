@@ -46,7 +46,7 @@
       compareAt: 188000,
       image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=900&q=82",
       best: false,
-      items: ["Camiseta Motion", "Medias Crew Pro", "Botín Vector"],
+      items: ["Camiseta Motion", "Jogger Active", "Gorra Pace"],
     },
   ];
 
@@ -70,6 +70,97 @@
       sessionStorage.setItem(OFFER_HINT_DISMISSED_KEY, "1");
     } catch {}
   };
+
+  function ensureHintStyles() {
+    if (document.getElementById("productComboHintRuntimeStyles")) return;
+
+    const style = document.createElement("style");
+    style.id = "productComboHintRuntimeStyles";
+    style.textContent = `
+      #offerList .product-combo-card {
+        width: calc(100% + 20px);
+        max-width: none;
+        margin-right: -10px;
+        margin-left: -10px;
+      }
+
+      #offerList .product-combo-card__hint {
+        position: absolute;
+        z-index: 20;
+        top: calc(100% + 10px);
+        right: 4px;
+        display: flex;
+        min-height: 34px;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 8px 7px 11px;
+        border-radius: 5px;
+        background: #fff;
+        color: #111;
+        box-shadow: 0 5px 16px rgba(0,0,0,.14), 0 1px 3px rgba(0,0,0,.08);
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 180ms ease, transform 180ms ease;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+
+      #offerList .product-combo-card__hint::before {
+        content: "";
+        position: absolute;
+        top: -7px;
+        right: 34px;
+        width: 0;
+        height: 0;
+        border-right: 7px solid transparent;
+        border-bottom: 8px solid #fff;
+        border-left: 7px solid transparent;
+      }
+
+      #offerList .product-combo-card__hint.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      #offerList .product-combo-card__hint > span {
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+
+      #offerList .product-combo-card__hint button {
+        display: grid;
+        width: 20px;
+        height: 20px;
+        flex: 0 0 20px;
+        place-items: center;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: #f0efed;
+        color: #686868;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      @media (min-width: 721px) {
+        #offerList .product-combo-card {
+          width: 100%;
+          margin-right: auto;
+          margin-left: auto;
+        }
+
+        #offerList .product-combo-card__hint > span {
+          font-size: 11px;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
 
   function badgeMarkup() {
     return `
@@ -318,6 +409,7 @@
   }
 
   function init() {
+    ensureHintStyles();
     if (purchasePrice) {
       const numeric = Number(String(purchasePrice.textContent || "").replace(/[^0-9]/g, ""));
       if (numeric) purchasePrice.dataset.productBase = String(numeric);
