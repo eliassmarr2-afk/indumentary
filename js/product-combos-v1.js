@@ -9,6 +9,8 @@
 
   if (!offerList) return;
 
+  const OFFER_HINT_DISMISSED_KEY = "indumentary.offerDetailsHintDismissed.v1";
+
   const money = (value) => new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: "ARS",
@@ -51,8 +53,23 @@
   let selectedComboId = null;
   let activeDetailId = null;
   let backdrop = null;
+  let hintObserver = null;
 
   const getCombo = (id) => combos.find((combo) => combo.id === id) || null;
+
+  const isHintDismissed = () => {
+    try {
+      return sessionStorage.getItem(OFFER_HINT_DISMISSED_KEY) === "1";
+    } catch {
+      return false;
+    }
+  };
+
+  const dismissHintForSession = () => {
+    try {
+      sessionStorage.setItem(OFFER_HINT_DISMISSED_KEY, "1");
+    } catch {}
+  };
 
   function badgeMarkup() {
     return `
@@ -63,10 +80,20 @@
     `;
   }
 
+  function hintMarkup() {
+    return `
+      <aside class="product-combo-card__hint" data-offer-hint aria-live="polite">
+        <span>Mirá los detalles de la oferta</span>
+        <button type="button" data-offer-hint-close aria-label="Cerrar sugerencia">×</button>
+      </aside>
+    `;
+  }
+
   function cardMarkup(combo) {
     return `
       <article class="product-combo-card${selectedComboId === combo.id ? " is-selected" : "}" data-combo-id="${combo.id}" role="button" tabindex="0" aria-pressed="${selectedComboId === combo.id}">
         ${combo.best ? badgeMarkup() : ""}
+        ${combo.best ? hintMarkup() : ""}
         <div class="product-combo-card__media">
           <img src="${combo.image}" alt="${combo.title}" loading="lazy" />
         </div>
@@ -87,8 +114,35 @@
     `;
   }
 
+  function mountHintObserver() {
+    hintObserver?.disconnect();
+    hintObserver = null;
+
+    const card = offerList.querySelector('[data-combo-id="combo-street"]');
+    const hint = card?.querySelector("[data-offer-hint]");
+    if (!card || !hint || isHintDismissed()) return;
+
+    if (!("IntersectionObserver" in window)) {
+      hint.classList.add("is-visible");
+      return;
+    }
+
+    hintObserver = new IntersectionObserver((entries, observer) => {
+      const entry = entries[0];
+      if (!entry?.isIntersecting || entry.intersectionRatio < 0.45) return;
+      hint.classList.add("is-visible");
+      observer.disconnect();
+      hintObserver = null;
+    }, {
+      threshold: [0.45, 0.65],
+    });
+
+    hintObserver.observe(card);
+  }
+
   function renderCards() {
     offerList.innerHTML = combos.map(cardMarkup).join("");
+    mountHintObserver();
   }
 
   function updatePurchaseBar() {
@@ -213,6 +267,17 @@
 
   function bind() {
     offerList.addEventListener("click", (event) => {
+      const hintClose = event.target.closest("[data-offer-hint-close]");
+      if (hintClose) {
+        event.preventDefault();
+        event.stopPropagation();
+        dismissHintForSession();
+        hintObserver?.disconnect();
+        hintObserver = null;
+        hintClose.closest("[data-offer-hint]")?.classList.remove("is-visible");
+        return;
+      }
+
       const details = event.target.closest("[data-combo-details]");
       if (details) {
         event.preventDefault();
