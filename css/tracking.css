@@ -156,6 +156,34 @@ button, a { -webkit-tap-highlight-color: transparent; }
   user-select: none;
 }
 
+.tracking-help-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 22px auto 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #171717;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.tracking-help-link svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+.tracking-help-link:active { opacity: .66; }
+
 .tracking-drawer-backdrop {
   position: fixed;
   z-index: 120;
@@ -243,4 +271,5 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .tracking-search input { height: 50px; padding: 0 13px; font-size: 13px; }
   .tracking-search button { min-width: 82px; height: 50px; padding: 0 15px; }
   .tracking-empty { margin-top: 24px; }
+  .tracking-help-link { margin-top: 18px; font-size: 13px; }
 }
