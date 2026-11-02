@@ -19,6 +19,12 @@ body.tracking-body {
 button, input { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 
+.tracking-empty[hidden],
+.tracking-help-row[hidden],
+.tracking-results[hidden] {
+  display: none !important;
+}
+
 .tracking-header {
   position: sticky;
   z-index: 80;
