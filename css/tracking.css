@@ -157,10 +157,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 
 .tracking-help-link {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
   align-items: center;
+  justify-content: center;
   gap: 7px;
-  margin: 22px auto 0;
+  margin: 40px auto 0;
   padding: 0;
   border: 0;
   background: transparent;
@@ -169,6 +171,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   font-size: 14px;
   font-weight: 600;
   line-height: 1.35;
+  text-align: center;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
@@ -176,6 +179,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .tracking-help-link svg {
   width: 17px;
   height: 17px;
+  flex: 0 0 17px;
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -271,5 +275,5 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .tracking-search input { height: 50px; padding: 0 13px; font-size: 13px; }
   .tracking-search button { min-width: 82px; height: 50px; padding: 0 15px; }
   .tracking-empty { margin-top: 24px; }
-  .tracking-help-link { margin-top: 18px; font-size: 13px; }
+  .tracking-help-link { margin-top: 36px; font-size: 13px; }
 }
