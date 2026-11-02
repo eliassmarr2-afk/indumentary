@@ -135,19 +135,23 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .tracking-search button:active { transform: translateY(1px); }
 
 .tracking-empty {
-  display: grid;
-  min-height: 390px;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 28px;
-  overflow: hidden;
-  border-radius: 18px;
-  background: rgba(255,255,255,.34);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
 }
 .tracking-empty img {
   display: block;
   width: min(100%, 650px);
   height: auto;
-  opacity: .94;
+  background: transparent;
+  opacity: 1;
   pointer-events: none;
   user-select: none;
 }
@@ -229,7 +233,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 @media (min-width: 760px) {
   .tracking-main { padding-top: 68px; }
-  .tracking-empty { min-height: 470px; }
 }
 @media (max-width: 420px) {
   .tracking-header { min-height: 76px; padding-right: 12px; padding-left: 12px; }
@@ -239,5 +242,5 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .tracking-search { gap: 7px; }
   .tracking-search input { height: 50px; padding: 0 13px; font-size: 13px; }
   .tracking-search button { min-width: 82px; height: 50px; padding: 0 15px; }
-  .tracking-empty { min-height: 330px; margin-top: 24px; border-radius: 14px; }
+  .tracking-empty { margin-top: 24px; }
 }
