@@ -1,0 +1,198 @@
+/* PRODUCT PAGE REFINEMENTS — approved visual polish */
+
+:root {
+  --surface-pastel: #f3f1ee;
+  --surface-pastel-border: rgba(17, 17, 17, .06);
+  --surface-pastel-shadow: 0 8px 24px rgba(17, 17, 17, .06), 0 2px 6px rgba(17, 17, 17, .035);
+}
+
+/* Seller identity + support actions: one calm pastel container. */
+.seller-row {
+  padding: 12px 14px;
+  border: 1px solid var(--surface-pastel-border);
+  border-radius: 10px;
+  background: var(--surface-pastel);
+  box-shadow: var(--surface-pastel-shadow);
+}
+
+.seller-actions button {
+  border: 1px solid rgba(17,17,17,.05);
+  background: rgba(255,255,255,.72);
+  box-shadow: 0 2px 7px rgba(17,17,17,.035);
+}
+
+/* Same visual language for the registered-address container only.
+   Behavior and location state remain owned by product-commercial-v1.js. */
+.product-commercial-body .commercial-address-row__button {
+  border: 1px solid var(--surface-pastel-border) !important;
+  border-radius: 10px !important;
+  background: var(--surface-pastel) !important;
+  box-shadow: var(--surface-pastel-shadow) !important;
+}
+
+.product-commercial-body .commercial-address-row__button:active {
+  background: #ece9e5 !important;
+}
+
+/* Dynamic policy sheet: only Returns and Payments/Privacy use this surface. */
+.product-policy-backdrop {
+  position: fixed;
+  z-index: 290;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(17,17,17,.38);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.product-policy-backdrop[hidden] {
+  display: none !important;
+}
+
+.product-policy-backdrop.is-open {
+  opacity: 1;
+}
+
+.product-policy-sheet {
+  width: min(100%, 720px);
+  max-height: min(88vh, 820px);
+  overflow-y: auto;
+  padding: 10px 22px calc(28px + env(safe-area-inset-bottom));
+  border-radius: 28px 28px 0 0;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 -14px 42px rgba(0,0,0,.10);
+  transform: translateY(26px);
+  transition: transform 180ms ease;
+  font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.product-policy-backdrop.is-open .product-policy-sheet {
+  transform: translateY(0);
+}
+
+.product-policy-sheet__handle {
+  width: 44px;
+  height: 5px;
+  margin: 0 auto 18px;
+  border-radius: 999px;
+  background: #d8d4cf;
+}
+
+.product-policy-sheet__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 38px;
+  gap: 14px;
+  align-items: start;
+}
+
+.product-policy-sheet__eyebrow {
+  display: block;
+  color: #8b857f;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+}
+
+.product-policy-sheet__top h2 {
+  margin: 6px 0 0;
+  font-size: clamp(27px, 7vw, 34px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -.035em;
+}
+
+.product-policy-sheet__close {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface-pastel);
+  color: #444;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.product-policy-sheet__intro {
+  margin: 14px 0 0;
+  color: #605b56;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.product-policy-sheet__sections {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.product-policy-card {
+  padding: 15px 16px;
+  border: 1px solid rgba(17,17,17,.055);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f5f1ec 0%, #f1f4ef 100%);
+}
+
+.product-policy-card h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.product-policy-card p {
+  margin: 7px 0 0;
+  color: #66615c;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.product-policy-sheet__source {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #eef3f8;
+}
+
+.product-policy-sheet__source span,
+.product-policy-sheet__source strong {
+  display: block;
+}
+
+.product-policy-sheet__source span {
+  color: #777;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.product-policy-sheet__source strong {
+  color: #111;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.product-policy-sheet__note {
+  margin: 12px 0 0;
+  color: #99938d;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+@media (min-width: 721px) {
+  .product-policy-sheet {
+    margin-bottom: 24px;
+    border-radius: 28px;
+  }
+}
