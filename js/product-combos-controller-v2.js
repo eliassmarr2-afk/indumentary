@@ -38,7 +38,15 @@
   const productBaseCompare = oldPrice?.textContent || "$ 89.990";
   let selected = false;
 
+  /*
+    Legacy CSS kept only the second static offer visible because the original
+    mock contained three cards. The V2 controller owns exactly ONE card.
+    The hidden sentinel preserves compatibility with that historical selector,
+    while the explicit inline !important below guarantees visibility even if
+    that CSS remains cached in the browser.
+  */
   offerList.innerHTML = `
+    <span hidden aria-hidden="true" data-offer-legacy-sentinel></span>
     <article class="product-combo-card" data-combo-id="${combo.id}" role="button" tabindex="0" aria-pressed="false">
       <span class="product-combo-card__best">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13 11 22l-9-9V4h9l9 9Z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg>
@@ -65,6 +73,9 @@
 
   const card = offerList.querySelector(".product-combo-card");
   const detailsButton = offerList.querySelector("[data-combo-details]");
+
+  /* Runtime guard against the legacy nth-child visibility rule. */
+  card?.style.setProperty("display", "grid", "important");
 
   const updatePurchaseState = () => {
     card?.classList.toggle("is-selected", selected);
