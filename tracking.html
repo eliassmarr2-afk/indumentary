@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090909" />
+  <meta name="indumentary-build" content="20261102-1130" />
+  <title>Seguimiento de envío · IND.</title>
+  <meta name="description" content="Consultá el estado de tu envío en IND." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/tracking.css?v=20261102-1130" />
+</head>
+<body class="tracking-body">
+  <header class="tracking-header">
+    <button id="trackingMenuButton" class="tracking-header__control" type="button" aria-label="Abrir menú" aria-controls="trackingDrawer" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="tracking-header__brand" href="./index.html" aria-label="Ir al inicio">IND.</a>
+    <a class="tracking-header__cart" href="./index.html#cart" aria-label="Ver carrito">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 1.9-1.4L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+      <span class="tracking-header__cart-count">0</span>
+    </a>
+  </header>
+
+  <div id="trackingDrawerBackdrop" class="tracking-drawer-backdrop" aria-hidden="true"></div>
+  <aside id="trackingDrawer" class="tracking-drawer" aria-hidden="true">
+    <div class="tracking-drawer__top">
+      <span class="tracking-drawer__brand">IND.</span>
+      <button id="trackingDrawerClose" class="tracking-drawer__close" type="button" aria-label="Cerrar menú">×</button>
+    </div>
+    <nav class="tracking-nav" aria-label="Navegación principal">
+      <a class="tracking-nav__link" href="./index.html">INICIO</a>
+      <button class="tracking-nav__toggle" type="button" data-tracking-submenu aria-controls="trackingCollections" aria-expanded="false">COLECCIONES <span>+</span></button>
+      <div id="trackingCollections" class="tracking-nav__sub">
+        <a href="./index.html">CAMISETAS</a>
+        <a href="./index.html">CAMPERAS</a>
+        <a href="./index.html">PANTALONES</a>
+        <a href="./index.html">MEDIAS</a>
+        <a href="./index.html">BOTINES</a>
+        <a href="./index.html">GORRAS Y PILUSOS</a>
+      </div>
+      <a class="tracking-nav__link" href="./index.html">CUPONES</a>
+      <a class="tracking-nav__link" href="./index.html">NOVEDADES</a>
+      <div class="tracking-nav__divider" aria-hidden="true"></div>
+      <a class="tracking-nav__link is-active" href="./tracking.html">SABER DE MI ENVÍO</a>
+      <a class="tracking-nav__link" href="./index.html">SOPORTE</a>
+      <div class="tracking-nav__divider" aria-hidden="true"></div>
+      <button class="tracking-nav__toggle" type="button" data-tracking-submenu aria-controls="trackingPolicies" aria-expanded="false">POLÍTICAS <span>+</span></button>
+      <div id="trackingPolicies" class="tracking-nav__sub">
+        <a href="./index.html">ENVÍO</a>
+        <a href="./index.html">DEVOLUCIÓN O CAMBIOS</a>
+        <a href="./index.html">NAVEGACIÓN</a>
+        <a href="./index.html">PRIVACIDAD Y DATOS</a>
+        <a href="./index.html">TÉRMINOS DE USO</a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="tracking-main">
+    <section class="tracking-copy" aria-labelledby="trackingTitle">
+      <h1 id="trackingTitle">Consultá el estado de tu envio</h1>
+      <p>Insertá tu ID de seguimiento para tener noticias actualizadas.</p>
+    </section>
+
+    <form id="trackingSearchForm" class="tracking-search" novalidate>
+      <input id="trackingId" name="tracking_id" type="text" autocomplete="off" placeholder="Poné tu ID de seguimiento" aria-label="ID de seguimiento" />
+      <button type="submit">Buscar</button>
+    </form>
+
+    <section class="tracking-empty" aria-label="Estado inicial de seguimiento">
+      <img src="./assets/tracking-empty-state-v2.svg?v=20261102-1130" alt="Ilustración de una persona buscando información de seguimiento con binoculares" />
+    </section>
+  </main>
+
+  <script defer src="./js/tracking.js?v=20261102-1130"></script>
+</body>
+</html>
