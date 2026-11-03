@@ -327,3 +327,28 @@ assets/support-illustration-approved.webp
 **Next contract work**: complete Support Start request/response and subjects with current Protocol Data Support contracts, secure email capability handoff, conversation continuation, error semantics, authorization, auditability and no-browser-secret guarantee; then certify live integration. Do not confuse visual completion with production authorization.
 
 **Bank-wide promotion**: Both Tracking and Support contracts are reusable site-level candidates only. Promote to `Ecosistema-para-negocios` central documentation after implementation validation and explicit acceptance; do not silently modify frozen central standards.
+
+---
+
+# 2026-11-03 — CUSTOMER CONVERSATION / DYNAMIC HEADER ADDENDUM
+
+Authoritative **site-level semantic contract**:
+
+`CUSTOMER_CONVERSATION_SURFACE_CONTRACT.md`
+
+Agreed two contexts for the **same** Support conversation UI:
+
+- General consultation: no canonical Order association on the Support Case (does not prove the visitor never bought).
+- Purchase-related consultation: a **canonically associated Order** within the exact authorized Store/Workspace, with public-safe customer projection before showing Order context.
+
+The **current** Support Customer public case projection does not expose `order_id`; a buyer-specific dynamic header therefore remains a reserved, non-live capability requiring explicit public-safe projection authorization. No matching customer emails/phone/tracking/order name in frontend, no operator privileged queries from the browser.
+
+State:
+
+```text
+CHAT SEMANTIC DESIGN = AGREED
+TWO-MODE DYNAMIC HEADER = AGREED
+CHAT MOCK UI = NOT IMPLEMENTED
+LIVE SUPPORT CUSTOMER INTEGRATION = NOT ACTIVE
+CENTRAL PROMOTION = PENDING VALIDATION AND FREEZE
+```
