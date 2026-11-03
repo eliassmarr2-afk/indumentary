@@ -124,3 +124,9 @@ This is **not yet BANK-WIDE PASS/FROZEN**. Reusable central promotion requires v
 Approved: visual composition, transparent illustration, initial three fields and conditional `Otro`; construction of development-only page.
 
 Pending: complete message/composer contract, production subject taxonomy, secure initial submit, email delivery, capability continuation flow, public-safe errors, anti-abuse, return states, integration certification and central promotion.
+
+---
+
+## 8. Customer Conversation continuation (agreed 2026-11-03)
+
+The customer-facing continuation/chat semantic and **dynamic buyer-associated vs general visitor context** are documented separately in `CUSTOMER_CONVERSATION_SURFACE_CONTRACT.md`. Support Start remains a distinct public entrypoint and must not infer Order association from email or browser context. No buyer-specific header is authorized by the current public `support-customer` case projection without a future explicit customer-safe Order-context projection.
