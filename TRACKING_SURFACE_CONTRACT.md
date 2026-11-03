@@ -551,3 +551,28 @@ After `indumentary` validates:
 it can be proposed for promotion to the central SITIOS WEB DE NICHO documentation.
 
 Promotion requires explicit discussion and acceptance before modifying the frozen central architectural baseline.
+
+---
+
+## 19. Home entrypoint and navigation (2026-11-03)
+
+The Home side-menu item `SABER DE MI ENVÍO` is a **real navigation link**, not a shipping-location dialog trigger.
+
+```text
+Home: index.html
+  └─ Side menu: SABER DE MI ENVÍO
+       └─ href="./tracking.html"
+            └─ Tracking Surface
+```
+
+Implementation boundaries:
+
+- `index.html`: anchor `<a class="menu-link" href="./tracking.html" data-close-menu>`.
+- `js/app.js`: no `shippingMenuButton` listener opening `openLocationModal`.
+- Session-wide shipping address selection remains independently owned by `locationTrigger` and the location modal.
+- Product checkout/shipping address UI is not a proxy for customer tracking authorization.
+- The Tracking page's public UI remains in `tracking.html` and `js/tracking.js`.
+- No production Protocol Data integration or capability authentication is implied by adding this link.
+
+Runtime verification: tapping the item in Home must navigate to `tracking.html`, rather than opening the address modal. Test on mobile after deployment with the versioned `js/app.js` URL.
+
