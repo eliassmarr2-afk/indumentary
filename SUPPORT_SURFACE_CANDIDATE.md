@@ -1,7 +1,7 @@
 # SUPPORT SURFACE — INDUMENTARY · INITIAL CANDIDATE
 
 **Date:** 2026-11-03  
-**Status:** DESIGN CANDIDATE / PENDING VISUAL APPROVAL / NOT IMPLEMENTED  
+**Status:** VISUAL APPROVED / V0 DEMO IMPLEMENTED / PRODUCTION NOT ACTIVE  
 **Repository:** `eliassmarr2-afk/indumentary`  
 **Future authority:** Protocol Data V2 · Support / Conversations  
 **Current live integration:** NONE
@@ -49,14 +49,14 @@ EXPERIENCE CAPABILITY
 
 Never expose capabilities in analytics, arbitrary local storage, debug logs or URL telemetry. Do not place secret credentials in public GitHub Pages scripts. The form is not a direct database client. No mock UI action should claim to create a real case.
 
-## 4. Pending before implementation
+## 4. Visual acceptance and implementation outcome
 
-1. Approve illustrative asset.
-2. Approve field composition and subject options, including the `Otro` interaction.
-3. Agree the submit affordance, help/error/confirmation states and the exact public-safe backend boundaries.
-4. Materialize support page and its adapter as development-only UI; independently certify before live integration.
-5. Promote as a candidate for reuse only after validation. Central promotion follows DISCUSSION → AGREEMENT → CANDIDATE → EXPLICIT ACCEPTANCE → PASS / FROZEN → MATERIALIZATION.
+1. Operator expressly approved the illustration and visual/form composition.
+2. Illustration is in `assets/support-illustration-approved.webp`, transparent and independent from the real HTML form.
+3. `soporte.html`, `css/support.css` and `js/support.js` implement V0 in **non-submitting demo mode**.
+4. Initial dropdown options are provisional UI values; not Protocol Data canonical taxonomy.
+5. `SUPPORT_SURFACE_CONTRACT.md` is the current authoritative implementation contract for this site. Future public integration, backend semantics and cross-site promotion remain pending.
 
 ## 5. Site navigation
 
-Home currently has a reserved `SOPORTE` item. This candidate must not convert that item to a real navigation link until the Support Surface route exists and has been reviewed.
+Home and Tracking menus now link `SOPORTE` to `./soporte.html`. The destination is a **demo-only** Support Start page and does not claim backend activation.
