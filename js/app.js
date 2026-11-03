@@ -30,7 +30,6 @@ const elements = {
   productGrid: $("#productGrid"),
   resultCount: $("#resultCount"),
   emptyState: $("#emptyState"),
-  shippingMenuButton: $("#shippingMenuButton"),
   toast: $("#toast"),
 };
 
@@ -213,7 +212,6 @@ function bindEvents() {
   });
   elements.locationForm.addEventListener("submit", handleLocationSubmit);
 
-  elements.shippingMenuButton.addEventListener("click", openLocationModal);
   elements.productSearch.addEventListener("input", (event) => runSearch(event.target.value));
 
   elements.categoryList.addEventListener("click", (event) => {
