@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090909" />
+  <meta name="indumentary-build" content="20261103-1530" />
+  <title>Soporte · IND.</title>
+  <meta name="description" content="Iniciá una consulta de Soporte en IND." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/support.css?v=20261103-1530" />
+</head>
+<body class="support-body">
+  <header class="support-header">
+    <button id="supportMenuButton" class="support-header__icon" type="button" aria-label="Abrir menú" aria-controls="supportDrawer" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="support-header__brand" href="./index.html" aria-label="Ir al inicio">IND.</a>
+    <a class="support-header__cart" href="./index.html#cart" aria-label="Ver carrito">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 1.9-1.4L21 7H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="support-header__count">0</span>
+    </a>
+  </header>
+  <div id="supportDrawerBackdrop" class="support-drawer-backdrop" hidden></div>
+  <aside id="supportDrawer" class="support-drawer" aria-hidden="true" inert>
+    <div class="support-drawer__top"><span class="support-drawer__brand">IND.</span>
+      <button id="supportDrawerClose" class="support-drawer__close" type="button" aria-label="Cerrar menú">×</button>
+    </div>
+    <nav class="support-nav" aria-label="Navegación principal">
+      <a href="./index.html">INICIO</a>
+      <a href="./index.html#categorias">COLECCIONES</a>
+      <a href="./index.html#productos">NOVEDADES</a>
+      <a href="./tracking.html">SABER DE MI ENVÍO</a>
+      <a class="is-active" href="./soporte.html" aria-current="page">SOPORTE</a>
+      <a href="./index.html">POLÍTICAS</a>
+    </nav>
+  </aside>
+
+  <main class="support-main">
+    <div class="support-illustration" aria-hidden="true">
+      <img src="./assets/support-illustration-approved.webp" alt="" width="1030" height="490" decoding="async" />
+    </div>
+
+    <section class="support-intro" aria-labelledby="supportTitle">
+      <h1 id="supportTitle">Contactá con Soporte</h1>
+      <p>Podés iniciar una consulta desde acá. Cuando se habilite la atención, recibirás en tu correo un acceso seguro para continuar la conversación.</p>
+    </section>
+
+    <section class="support-form-card" aria-label="Formulario de contacto">
+      <form id="supportStartForm">
+        <div class="support-field">
+          <label for="supportName">Nombre</label>
+          <input id="supportName" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Tu nombre y apellido" required />
+        </div>
+        <div class="support-field">
+          <label for="supportEmail">Correo</label>
+          <input id="supportEmail" name="email" type="email" autocomplete="email" maxlength="254" placeholder="Tu correo electrónico" required />
+        </div>
+        <div class="support-field">
+          <label for="supportSubject">Asunto</label>
+          <select id="supportSubject" name="subject" required>
+            <option value="" selected disabled>Seleccioná un motivo</option>
+            <option value="pedido">Consulta sobre mi pedido</option>
+            <option value="envio">Envío y seguimiento</option>
+            <option value="cambios">Cambios y devoluciones</option>
+            <option value="productos">Productos y disponibilidad</option>
+            <option value="otro">Otro</option>
+          </select>
+          <span class="support-field__chevron" aria-hidden="true"></span>
+        </div>
+        <div class="support-field" id="supportOtherField" hidden>
+          <label for="supportOther">Contanos el asunto</label>
+          <input id="supportOther" name="other_subject" type="text" maxlength="160" placeholder="¿Sobre qué necesitás ayuda?" />
+        </div>
+
+        <button class="support-submit" type="submit" aria-describedby="supportDemoNote">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          <span>Contactar con Soporte</span>
+        </button>
+        <p id="supportDemoNote" class="support-disclaimer">Versión de demostración. Este formulario todavía no envía consultas reales.</p>
+        <p id="supportFeedback" class="support-feedback" role="status" aria-live="polite" hidden></p>
+      </form>
+    </section>
+  </main>
+  <script defer src="./js/support.js?v=20261103-1530"></script>
+</body>
+</html>
