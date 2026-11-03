@@ -283,3 +283,47 @@ DISCUSSION / STRUCTURE AGREEMENT NEXT
 ```
 
 Do not claim Shopify or Protocol Data integration from the current mocks.
+
+---
+
+# 2026-11-03 — TRACKING + SUPPORT SURFACES ADDENDUM
+
+This addendum supersedes the older `PRODUCT PAGE ... NEXT` continuation in this waypoint; previous sections remain historical.
+
+**Current development state**:
+
+```text
+TRACKING SURFACE UI = IMPLEMENTED / DEMO LOOKUP
+TRACKING LIVE BACKEND = NOT ACTIVE
+SUPPORT START UI = IMPLEMENTED / DEMO-ONLY / VISUAL APPROVED
+SUPPORT LIVE BACKEND = NOT ACTIVE
+SHOPIFY LIVE INTEGRATION = NOT ACTIVE
+```
+
+**Canonical site-level docs**:
+
+- `TRACKING_SURFACE_CONTRACT.md`: states, authorized composition, Tracking lookup boundary, independent timestamps, action intents, Home navigation and future reusable candidate.
+- `SUPPORT_SURFACE_CONTRACT.md`: Support Start UI, approved illustration, fields, current non-submitting behavior, capability separation and future integration contract.
+- `SUPPORT_SURFACE_CANDIDATE.md`: historical design brief, now approved and implemented V0; refer to the above contract for current implementation.
+
+**Navigation**:
+
+```text
+HOME > SABER DE MI ENVÍO  → tracking.html
+HOME > SOPORTE            → soporte.html
+TRACKING > SOPORTE        → soporte.html
+SUPPORT > TRACKING        → tracking.html
+```
+
+**Current implementation files**:
+
+```text
+soporte.html
+css/support.css
+js/support.js
+assets/support-illustration-approved.webp
+```
+
+**Next contract work**: complete Support Start request/response and subjects with current Protocol Data Support contracts, secure email capability handoff, conversation continuation, error semantics, authorization, auditability and no-browser-secret guarantee; then certify live integration. Do not confuse visual completion with production authorization.
+
+**Bank-wide promotion**: Both Tracking and Support contracts are reusable site-level candidates only. Promote to `Ecosistema-para-negocios` central documentation after implementation validation and explicit acceptance; do not silently modify frozen central standards.
